@@ -80,46 +80,6 @@ var command = args.shift().toLowerCase()
 
 let Clogs = message.guild.channels.find(x => x.name == "logs");
 
-if(command == "rule") {
-
-    message.delete()
-    
-    message.channel.send("**React to the messages below to Accept the Rules.**")
-    let embed14 = new Discord.RichEmbed()
-    .setDescription(`**0. General Server Rules**
-    **- 0.1** No alt accounts are allowed on the server.
-    **- 0.2** Do not leave the server with intent to try and evade your punishment.
-    ** - 0.3** Do not re-join the server if you have been banned.
-    **- 0.4** You are not allowed to give money or rp in any form to anyone unless you have the Dropper role.
-    **- 0.5** Do not impersonate staff.
-    **1. Chat**
-    **- 1.1** No hostility.
-    **- 1.2** Do not harass, bully or make racist remarks.
-    **- 1.3** Do not expose anyones personal information.
-    **- 1.4** Do not spam.
-    ** - 1.5** Only speak english. 
-    **- 1.6** Do not ask questions that have been answered in #faq.
-    **- 1.7** Do not ask when the next drop is.
-    **- 1.8** Do not ask for anyone's SC
-    **2. Links**
-    **- 2.1** No advertising in any way shape or form. This includes but is not limited to advertising other Discord servers.
-    ** - 2.2** Links should not link to any website that has content which includes, but is not limited to, pornography, gore, IP grabbers, malware, seizure inducing content and or racist content.
-    **3. @Mentions**
-    ** - 3.1** Do not @Mention roles.
-    ** - 3.2** Do not @Mention Staff members or Droppers if it isn't urgent.
-    **4. DM's / PM's**
-    **Rules 1 and 2.1 apply here**
-    ** - 4.1** Do not DM Staff and/or Droppers if it isn't urgent or if they haven't told you to.
-    **5. Friend Requests**
-    ** - 5.1** Do not add Staff or Droppers on Discord without permission.
-    ** - 5.2** Do not add Droppers on SC if they are not hosting a drop.
-    **6. Voice Chat**
-    **- 6.1** Do not broadcast earrape, intentionally annoying or distracting content`)
-    .setColor("#42f45c");
-    
-    message.channel.send(embed14).then(m => m.react("✅")).catch(console.error);
-
-    }
     
 if(command == "register") {
 message.delete();
@@ -149,13 +109,13 @@ let embed3 = new Discord.RichEmbed()
 .setColor("#42f45c");
 message.author.send(embed3);
 
-message.member.removeRole("576837526556377099")
-message.member.addRole("576837525637693511")
+message.member.removeRole("594185021389144066")
+message.member.addRole("594185059968221188")
 
 
 let guild = message.guild;
 
-const cnl = client.channels.get('576837582105739293');
+const cnl = client.channels.get('594187400339783721');
 const embed = new Discord.RichEmbed()
 .setAuthor(`${message.author.tag}`)
 .addField('Social Club:', ` ${args}`)
@@ -166,58 +126,6 @@ cnl.send({embed})
 
 }
 
-if(command == "meme") {
-message.delete();
-if(message.author.bot) return;
-if(message.channel.type !=="text") return;
-    
-randomPuppy('memes')
-.then(url => {
-const embed = new Discord.RichEmbed()
-.setImage(url)
-.setColor(`${message.guild.me.displayHexColor!=='#000000' ? message.guild.me.displayHexColor : 0xffffff}`)
-message.channel.send({ embed });
-    
-})
-
-}
-
-if(command == "lockdown") {
-message.delete();
-if (!client.lockit) client.lockit = [];
-const time = args.join(' ');
-const validUnlocks = ['release', 'unlock'];
-if (!time) return message.reply('You must set a duration for the lockdown in either hours, minutes or seconds').then(message => message.delete(6000));
-  
-if (validUnlocks.includes(time)) {
-message.channel.overwritePermissions(message.guild.id, {
-SEND_MESSAGES: null
-}) .then(() => {
-message.channel.send('Lockdown lifted.');
-clearTimeout(client.lockit[message.channel.id]);
-delete client.lockit[message.channel.id];
-}).catch(error => {
-console.log(error);
-});
-} else {
-message.channel.overwritePermissions(message.guild.id, {
-SEND_MESSAGES: false
-}).then(() => {
-message.channel.send(`Channel locked down for ${ms(ms(time), { long:true })}`).then(() => {
-
-client.lockit[message.channel.id] = setTimeout(() => {
-message.channel.overwritePermissions(message.guild.id, {
-SEND_MESSAGES: null
-}).then(message.channel.send('Lockdown lifted.')).catch(console.error);
-delete client.lockit[message.channel.id];
-}, ms(time));
-}).catch(error => {
-console.log(error);
-});
-});
-}
-}
-
 if(command == "unregister") {
 message.delete();
 let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
@@ -226,8 +134,8 @@ message.delete();
 message.channel.send("You are not Registered").then(message => message.delete(6000));
 delete data[message.author.id]
 fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
-message.member.addRole("576837526556377099")
-message.member.removeRole("576837525637693511")
+message.member.addRole("594185021389144066")
+message.member.removeRole("594185059968221188")
 message.channel.send("Your account has been successfully UnRegistered").then(message => message.delete(6000));
 }
     
@@ -247,81 +155,16 @@ const embed = new RichEmbed()
 return message.channel.send({ embed: embed
 
 });
- 
-};
-
-
-if(command == "userinfo") {
-message.delete();
-var target = message.mentions.users.first()
-if (target) 
-if(!message.member.roles.find(r => r.name == "Money Dropper")) return message.reply("You can't use this command");
-let member = message.mentions.members.first();
-if(!member) message.reply("You have to mention a member").then(message => message.delete(6000));
-let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
-let embed = new Discord.RichEmbed()
-.setAuthor(member.user.username + " Info", member.user.displayAvatarURL)
-.setColor("#363843")
-.setDescription(`	󠇰	\n**TAG:** ${member.user.tag}\n\n**ID:** ${member.user.id}\n\n**CREATED:** ${target.createdAt}\n\n**SOCIALCLUB:** ${data[member.user.id] ? data[member.user.id] : "UNREGISTERED"}\n\n**JOINED:** ${member.joinedAt}`);
-
-message.channel.send(embed).then(message => message.delete(60000))
 
 }
     
-
-if(command == "join") {
-message.delete();
-if(!Active[0]) return message.reply("The money drop lobby is not opened").then(message => message.delete(6000));
-let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8")
-if(!data[message.author.id]) return message.channel.send("You have to register first with your Social Club name").then(message => message.delete(6000));
-message.delete();
-if(Queue.find(d => d.id == message.author.id)) return message.channel.send(util.sendEmbed(message,"You have already Joined the Queue!")).then(message => message.delete(6000));
-Queue.push({
-name: message.author.tag,
-id : message.author.id,
-active: false
-});
-let verifyEmbed = new Discord.RichEmbed()
-.setAuthor(message.member.displayName, message.author.displayAvatarURL)
-.setColor('#36393f')
-.setDescription("You have joined the Money Drop Queue!")
-message.channel.send(verifyEmbed);
-
-let embed1 = new Discord.RichEmbed()
-.setDescription("**Your Current Position Is **"  + Queue.length + "** Now that you are In the queue, please be sure to read the rules and how to join. Other than that, enjoy your time in the money drop lobby**")
-.setColor("#42f45c");
-message.author.send(embed1);
-
-message.guild.channels.get(config.QLOGS).send(util.sendEmbed(message, `${message.author} has Joined the Queue\n\n**TAG:** ${message.author.tag}\n\n**SOCIALCLUB:** ${data[message.author.id]}`));
-    
-}
-
-if(command == "leave"){
-message.delete();
-if(!Active[0]) return message.reply("The Money Drop lobby is not opened").then(message => message.delete(6000));
-if(!Queue.find(d => d.id == message.author.id)) return message.reply("You are not in the Money Drop Queue!").then(message => message.delete(6000));
-let index = Queue.findIndex(d => d.id == message.author.id);
-Queue.splice(index);
-message.channel.send(util.sendEmbed(message, "You've leaved the Money Drop Queue!")).then(message => message.delete(6000));
-    
-}
-
-if(command == "open") {
-message.delete();
-if(!message.member.roles.find(r => r.name == "Money Dropper")) return message.reply("You can't use this command").then(message => message.delete(6000));
-if(Active[0]) return message.channel.send("There is already a Drop in progress by " + Active[1]).then(message => message.delete(6000));
-Active = [true , message.member];
-message.channel.send(`**<@&576837525637693511> Money Drop Has Started**`)
-message.guild.channels.get(config.QLOGS).send(util.sendEmbed(message, `A new Queue has been created by ${message.author}`));
-
-}
 
 if(command =="start") {
 message.delete();
 if(Active[0]) return message.channel.send("There is already a Drop in progress by " + Active[1]).then(message => message.delete(6000));
 if(!message.member.roles.find(r => r.name == "Money Dropper")) return message.reply("You can't use this command").then(message => message.delete(6000));
 Active = [true , message.member];
-message.channel.send(`**<@&576837525637693511> Money Drop Has Started**`)
+message.channel.send(`**<@&594185059968221188> Money Drop Has Started**`)
 message.guild.channels.get(config.QLOGS).send(util.sendEmbed(message, `A new Drop has been created by ${message.author}`));
 
 }
@@ -332,56 +175,9 @@ if(!Active[0]) return message.channel.send("There is no Drop in progress").then(
 if(Active[1].id !== message.author.id) return message.channel.send("Only " + Active[1] + " can finish the current Drop").then(message => message.delete(6000));
 Active = [false , false];
 Queue = new Array();
-message.channel.send(`**<@&576837525637693511> Money Drop Has Stopped**`)
+message.channel.send(`**<@&594185059968221188> Money Drop Has Stopped**`)
 message.guild.channels.get(config.QLOGS).send(util.sendEmbed(message, `The current Drop by ${message.author} has been stopped`));
 
-}
-
-if(command == "next") {
-message.delete();
-if(!message.member.roles.find(r => r.name == "Money Dropper")) return message.reply("You can't use this command").then(message => message.delete(6000));
-if(!Active[0]) return message.channel.send("There is no Drop in progress").then(message => message.delete(6000));
-if(Active[1].id !== message.author.id) return message.channel.send("Only " + Active[1] + " can next the current Queue").then(message => message.delete(6000));
-let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
-if(Queue[0].active) {
-Queue.splice(0,1)
-if(Queue.length == 0) return message.channel.send("The Queue is empy, you can finish it with >close").then(message => message.delete(6000));
-Queue[0].active = true
-message.channel.send(util.sendEmbed(message, `Next one in the Queue is ${Queue[0].name}, I've sent him a message notifying him`));
-
-let embed2 = new Discord.RichEmbed()
-.setDescription("**It is your turn to join the money drop lobby\n\nThe money Dropper Sc name is**") + data[Active[1].user.id];
-message.author.send(embed2);
-
-}else {
-Queue[0].active = true
-message.channel.send(util.sendEmbed(message, `Next one in the Queue is ${Queue[0].name}, I've sent him a message notifying him`));
-client.users.get(Queue[0].id).send(util.sendEmbed(message, "It is your turn to join the money drop lobby\n\nThe money Dropper Sc name is " + data[Active[1].user.id]));
-}
-
-}
-
-if(command == "help") {
-message.delete();
-let embed = new Discord.RichEmbed()
-.setAuthor("HELP COMMAND", client.user.displayAvatarURL)
-.setColor("#363843")
-.addField(">register [username]", "Saves the user Social Club username into the database and remove the unregistered role")
-.addField(">join", "Joins the current Queue if any.")
-.addField(">leave", "Leaves the current Queue if any.")
-.addField(">userinfo [tagged user]" , "See the info about a user (id, social club name, etc)")
-.addField(">open" ,"Crates a new Queue, if there is none currently opened")
-.addField(">close" , "Closes the current Queue, only available by the person who created the Queue")
-.addField(">next" , "Select the next person in the Queue (a message will be sent to the user)")
-.addField(">nsfw", "Null")
-.addField(">roleinfo", "Null")
-.addField(">serverinfo", "Null")
-.addField(">stats", "Null")
-.addField(">removerole", "Null")
-.addField(">ban", "Null")
-.addField(">warn", "Null")
-.addField(">purge", "Null")
-message.author.send(embed)
 
 }
 
@@ -625,17 +421,17 @@ ctx.arc(109,99,51.5, 0, 2 * Math.PI);
 ctx.clip()
 member.sendMessage(`Welcome to **Gta Money Drop**, ${member}! This is a free money drop discord server where you can get free money drops on GTA V Online PC \n\nTo get in the free money drop lobby's you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat\nafter that you will get the Registered role and info on how to join the money drop lobby's`)
 
-member.guild.channels.get("576837534492000293").send(`Welcome to **Gta Money Drop**, ${member}! You are the ${nums(member.guild.memberCount)} user`)
+member.guild.channels.get("594183892651737108").send(`Welcome to **Gta Money Drop**, ${member}! You are the ${nums(member.guild.memberCount)} user`)
 let avatar1 = await request.get(member.user.displayAvatarURL)
 let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
-member.guild.channels.get("576837534492000293").send({files : [await canvas.toBuffer()]}) 
+member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 setTimeout(() => {
-  if(member.roles.get('576837526556377099')) member.user.send(`Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked`)
-}, 86100000);
+  if(member.roles.get('594185021389144066')) member.user.send(`Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked`)
+}, 1000);
 setTimeout(() => {
-  if(member.roles.get('576837526556377099')) member.kick('Failed to register')
-}, 86400000);
+  if(member.roles.get('594185021389144066')) member.kick('Failed to register')
+}, 2000);
 })
 
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
