@@ -482,3 +482,4 @@ Clogs.send(embed2)
 })
 
 client.login(process.env.TOKEN);
+
