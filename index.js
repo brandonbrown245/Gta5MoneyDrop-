@@ -84,6 +84,9 @@ data[message.author.id] = socialName
 
 fs.writeFileSync('./userdata.json', JSON.stringify(data,null,2))
 
+message.member.removeRole("594185021389144066")
+message.member.addRole("594185059968221188")
+
 let verifyEmbed = new Discord.RichEmbed()
 .setAuthor(message.member.displayName, message.author.displayAvatarURL)
 .setColor('#36393f')
@@ -99,10 +102,6 @@ let embed3 = new Discord.RichEmbed()
 .setDescription("**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he start's a money drop then you just join his lobby just if he says he is doing a money drop**")
 .setColor("#42f45c");
 message.author.send(embed3);
-
-message.member.removeRole("594185021389144066")
-message.member.addRole("594185059968221188")
-
 
 let guild = message.guild;
 
