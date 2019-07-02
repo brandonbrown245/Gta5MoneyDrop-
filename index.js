@@ -50,16 +50,7 @@ fs.readdir('./events/', (err, files) => {
     console.log(`Loaded event '${evtName}'`);
     client.on(evtName, evt.bind(null, client));
   });
-});
-fs.readdir('./commands/', async (err, files) => {
-    if (err) return console.error;
-    files.forEach(file => {
-      if (!file.endsWith('.js')) return;
-      let props = require(`./commands/${file}`);
-      let cmdName = file.split('.')[0];
-      console.log(`Loaded command '${cmdName}'`);
-      client.commands.set(cmdName, props);
-    });
+
   });
 
 var Queue = new Array();
@@ -158,7 +149,6 @@ return message.channel.send({ embed: embed
 
 }
     
-
 if(command =="start") {
 message.delete();
 if(Active[0]) return message.channel.send("There is already a Drop in progress by " + Active[1]).then(message => message.delete(6000));
