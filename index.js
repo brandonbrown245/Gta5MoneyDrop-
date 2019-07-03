@@ -71,7 +71,6 @@ var command = args.shift().toLowerCase()
 
 let Clogs = message.guild.channels.find(x => x.name == "logs");
 
-    
 if(command == "register") {
 message.delete();
 let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
@@ -81,7 +80,6 @@ if (message.channel.name !== 'register') return message.reply('**You must Regist
 let socialName = args.join(" ")
 if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
 data[message.author.id] = socialName
-
 
 fs.writeFileSync('./userdata.json', JSON.stringify(data,null,2))
 
@@ -93,6 +91,13 @@ let verifyEmbed = new Discord.RichEmbed()
 .setColor('#36393f')
 .setDescription('Your account has been successfully Registered.')
 message.channel.send(verifyEmbed);
+
+let embed77 = new Discord.RichEmbed()
+.setAuthor(message.member.displayName, message.author.displayAvatarURL)
+.setColor('#36393f')
+.setDescription(`**${message.author.tag} This is The Social Club Name You Registered With ${args} If it is not Right just do >unregister in the unregister chat**`).then(message => message.delete(6000));
+message.channel.send(embed77);
+
 
 let embed4 = new Discord.RichEmbed()
 .setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
