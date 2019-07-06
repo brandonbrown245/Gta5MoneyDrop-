@@ -416,11 +416,11 @@ let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 setTimeout(() => {
-  if(member.roles.get('594185021389144066')) member.user.send(`Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked`)
-}, 1000);
+  if(member.roles.get('594185021389144066')) message.author.send(`Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked`)
+}, 10);
 setTimeout(() => {
   if(member.roles.get('594185021389144066')) member.kick('Failed to register')
-}, 2000);
+}, 20000);
 })
 
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
