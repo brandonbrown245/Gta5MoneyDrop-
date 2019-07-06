@@ -3,11 +3,12 @@ var Discord = require("discord.js");
 var request = require("node-superfetch");
 var moment = require("moment");
 var randomPuppy = require('random-puppy');
+var member = ('member')
+
 var m = require("moment-duration-format");
 let cpuStat = require("cpu-stat")
 var superagent = require('superagent')
 var ms = require('ms');
-var member = ('member')
 var id = ('id');
 var roles = ('roles');
 let os = require('os');
@@ -61,12 +62,7 @@ var Active = [false, false]
 
 client.on("ready", () => console.log("I'm onlin and ready!"));
 
-setTimeout(() => {
-  if(member.author.id('594185021389144066')) message.author.send(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next minutes you will be kicked**`)
-}, 30000);
-setTimeout(() => {
-  if(member.author.id('594185021389144066')) member.kick('Failed to register')
-}, 60000);
+
 
 
 client.on("message", async message  => {
@@ -74,6 +70,13 @@ client.on("message", async message  => {
 if(message.author.bot) return;
 if(!message.content.startsWith(config.PREFIX)) return;
 if(message.channel.type == "dm") return;
+
+setTimeout(() => {
+  if(member.author.id('594185021389144066')) message.author.send(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next minutes you will be kicked**`)
+}, 30000);
+setTimeout(() => {
+  if(member.author.id('594185021389144066')) member.kick('Failed to register')
+}, 60000);
 
 var prefix = config.PREFIX;
 var args = message.content.slice(prefix.length).trim().split(/ +/g);
