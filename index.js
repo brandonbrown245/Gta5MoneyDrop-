@@ -58,15 +58,10 @@ var Active = [false, false]
 
 client.on("ready", () => console.log("I'm onlin and ready!"));
 
-setTimeout(() => {
-  if(member.roles.get('594185021389144066')) message.author.send(`Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked`)
-}, 30000);
-setTimeout(() => {
-  if(member.roles.get('594185021389144066')) member.kick('Failed to register')
-}, 60000);
 
 
-client.on("message", async message  => {
+
+client.on("message , member", async message  => {
 
 if(message.author.bot) return;
 if(!message.content.startsWith(config.PREFIX)) return;
@@ -77,6 +72,13 @@ var args = message.content.slice(prefix.length).trim().split(/ +/g);
 var command = args.shift().toLowerCase()
 
 let Clogs = message.guild.channels.find(x => x.name == "logs");
+
+setTimeout(() => {
+  if(member.roles.get('594185021389144066')) message.author.send(`Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked`)
+}, 30000);
+setTimeout(() => {
+  if(member.roles.get('594185021389144066')) member.kick('Failed to register')
+}, 60000);
 
 if(command == "register") {
 message.delete();
