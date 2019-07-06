@@ -98,10 +98,10 @@ let embed77 = new Discord.RichEmbed()
 .setDescription(``).then(message => message.delete(6000));
 message.channel.send(embed77);
 
-let embed78 = new Discord.RichEmbed()
+let embed9 = new Discord.RichEmbed()
 .setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
 .setColor("#42f45c");
-message.author.send(embed4);
+message.author.send(embed9);
 
 let embed3 = new Discord.RichEmbed()
 .setDescription("**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he start's a money drop then you just join his lobby just if he says he is doing a money drop**")
