@@ -92,12 +92,6 @@ let verifyEmbed = new Discord.RichEmbed()
 .setDescription('Your account has been successfully Registered.')
 message.channel.send(verifyEmbed);
 
-let embed77 = new Discord.RichEmbed()
-.setAuthor(message.member.displayName, message.author.displayAvatarURL)
-.setColor('#36393f')
-.setDescription(``).then(message => message.delete(6000));
-message.channel.send(embed77);
-
 let embed9 = new Discord.RichEmbed()
 .setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
 .setColor("#42f45c");
