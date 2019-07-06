@@ -98,7 +98,7 @@ let embed9 = new Discord.RichEmbed()
 message.author.send(embed9);
 
 let embed3 = new Discord.RichEmbed()
-.setDescription(`**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n\n\This is The Social Club Name You Registered With ${args} If it is not Right just do >unregister in the unregister chat**`)
+.setDescription(`**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\nThis is The Social Club Name You Registered With ${args} If it is not Right just do >unregister in the unregister chat**`)
 .setColor("#42f45c");
 message.author.send(embed3);
 
