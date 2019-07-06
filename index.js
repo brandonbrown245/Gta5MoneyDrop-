@@ -7,6 +7,7 @@ var m = require("moment-duration-format");
 let cpuStat = require("cpu-stat")
 var superagent = require('superagent')
 var ms = require('ms');
+var member = require('member')
 let os = require('os')
 var rn = require('random-number');
 var { RichEmbed } = require('discord.js');
@@ -61,7 +62,7 @@ client.on("ready", () => console.log("I'm onlin and ready!"));
 
 
 
-client.on("message , member", async message  => {
+client.on("message", async message  => {
 
 if(message.author.bot) return;
 if(!message.content.startsWith(config.PREFIX)) return;
