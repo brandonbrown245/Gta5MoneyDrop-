@@ -9,6 +9,7 @@ var superagent = require('superagent')
 var ms = require('ms');
 var member = ('member')
 var get = ('get')
+var roles = ('roles')
 let os = require('os')
 var rn = require('random-number');
 var { RichEmbed } = require('discord.js');
