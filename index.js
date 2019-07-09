@@ -81,13 +81,13 @@ client.on("message", async message  => {
   if(member.roles.find(r => r.name == "Unregistered"))
   
   if(kick[kick.id] ){
-    message.guild.member(kick).kick(reason);
+    message.guild.member(kick).kick
     message.channel.send(`**<@${kick.id}> has been Kicked from the server Beacuse he didnt Register his social Club name**`);
     kick.send(`**You have been kicked in ${message.guild.name}\n**Reason**: You Disnt Register Your Socail Club Name On the Server \n**`)
-        
-  }
-  })
-  
+  } (86400000);
+
+})
+
 if(message.author.bot) return;
 if(!message.content.startsWith(config.PREFIX)) return;
 if(message.channel.type == "dm") return;
