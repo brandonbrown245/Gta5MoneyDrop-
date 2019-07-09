@@ -4,7 +4,7 @@ var request = require("node-superfetch");
 var moment = require("moment");
 var randomPuppy = require('random-puppy');
 var member = ('member')
-
+var role = ('role')
 var m = require("moment-duration-format");
 let cpuStat = require("cpu-stat")
 var superagent = require('superagent')
@@ -69,7 +69,7 @@ client.on("ready", () => console.log("I'm onlin and ready!"));
 client.on("message", async message  => {
 
 
-  if(!message.member.roles.find(r => r.name == "Unregistered")) 
+  if(!message.member.role.find(r => r.name == "Unregistered")) 
     
     return 
   
@@ -78,10 +78,10 @@ client.on("message", async message  => {
 
   setTimeout(() => {
   
-    if(!message.member.roles.find(r => r.name == "Unregistered")) 
+    if(!message.member.role.find(r => r.name == "Unregistered")) 
   
     return
-    
+
   if(kick[kick.id] ){
     message.guild.member(kick).kick
     message.channel.send(`**<@${kick.id}> has been Kicked from the server Beacuse he didnt Register his social Club name**`);
