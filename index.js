@@ -4,6 +4,7 @@ var request = require("node-superfetch");
 var moment = require("moment");
 var randomPuppy = require('random-puppy');
 var member = ('member')
+var find = ('find')
 var role = ('role')
 var m = require("moment-duration-format");
 let cpuStat = require("cpu-stat")
@@ -69,26 +70,7 @@ client.on("ready", () => console.log("I'm onlin and ready!"));
 client.on("message", async message  => {
 
 
-  if(!message.member.role.find(r => r.name == "Unregistered")) 
-    
-    return 
   
-    member.sendMessage(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next few hours  you will be kicked by our Discord bot**`);
-  
-
-  setTimeout(() => {
-  
-    if(!message.member.role.find(r => r.name == "Unregistered")) 
-  
-    return
-
-  if(kick[kick.id] ){
-    message.guild.member(kick).kick
-    message.channel.send(`**<@${kick.id}> has been Kicked from the server Beacuse he didnt Register his social Club name**`);
-    kick.send(`**You have been kicked in ${message.guild.name}\n**Reason**: You Disnt Register Your Socail Club Name On the Server \n**`)
-  } (86400000);
-
-})
 
 if(message.author.bot) return;
 if(!message.content.startsWith(config.PREFIX)) return;
@@ -448,6 +430,30 @@ await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 
 })
+
+client.on( async (member , roles , find) => {
+
+if(!message.member.role.find(r => r.name == "Unregistered")) 
+    
+    return 
+  
+    member.sendMessage(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next few hours  you will be kicked by our Discord bot**`);
+  
+
+  setTimeout(() => {
+  
+    if(!message.member.role.find(r => r.name == "Unregistered")) 
+  
+    return
+
+  if(kick[kick.id] ){
+    message.guild.member(kick).kick
+    message.channel.send(`**<@${kick.id}> has been Kicked from the server Beacuse he didnt Register his social Club name**`);
+    kick.send(`**You have been kicked in ${message.guild.name}\n**Reason**: You Disnt Register Your Socail Club Name On the Server \n**`)
+  } (86400000);
+
+})
+});
 
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
 
