@@ -81,7 +81,7 @@ setTimeout(() => {
   
   return 
 
-  message => message.author.send(6000)(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next minutes you will be kicked**`);
+  member.sendMessage(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next few hours  you will be kicked by our Discord bot**`);
 
 });
 
@@ -91,7 +91,7 @@ if(member.roles.find(r => r.name == "Unregistered"))
 
 member.kick('Failed to register')
 
-}, 60000);
+}, 3000);
 
 
 if(command == "register") {
