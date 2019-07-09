@@ -69,7 +69,7 @@ client.on("ready", () => console.log("I'm onlin and ready!"));
 client.on("message", async message  => {
 
 
-    if(member.roles(r => r.name == "Unregistered")) 
+  if(!message.member.roles.find(r => r.name == "Unregistered")) 
     
     return 
   
@@ -78,8 +78,10 @@ client.on("message", async message  => {
 
   setTimeout(() => {
   
-  if(member.roles(r => r.name == "Unregistered"))
+    if(!message.member.roles.find(r => r.name == "Unregistered")) 
   
+    return
+    
   if(kick[kick.id] ){
     message.guild.member(kick).kick
     message.channel.send(`**<@${kick.id}> has been Kicked from the server Beacuse he didnt Register his social Club name**`);
