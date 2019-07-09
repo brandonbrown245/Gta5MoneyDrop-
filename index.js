@@ -63,17 +63,6 @@ var Active = [false, false]
 
 client.on("ready", () => console.log("I'm onlin and ready!"));
 
-client.on("message", async message  => {
-
-if(message.author.bot) return;
-if(!message.content.startsWith(config.PREFIX)) return;
-if(message.channel.type == "dm") return;
-
-var prefix = config.PREFIX;
-var args = message.content.slice(prefix.length).trim().split(/ +/g);
-var command = args.shift().toLowerCase()
-
-let Clogs = message.guild.channels.find(x => x.name == "logs");
 
 setTimeout(() => {
 
@@ -89,9 +78,26 @@ setTimeout(() => {
 
 if(member.roles.find(r => r.name == "Unregistered"))
 
-member.kick('Failed to register')
+if(kic[kick.id] ){
+  message.guild.member(kick).kick(reason);
+  message.channel.send(`**<@${kick.id}> has been Kicked from the server Beacuse he didnt Register his social Club name**`);
+  kick.send(`**You have been kicked in ${message.guild.name}\n**Reason**: You Disnt Register Your Socail Club Name On the Server \n**`)
+      
+}
+})
 
-}, 3000);
+client.on("message", async message  => {
+
+if(message.author.bot) return;
+if(!message.content.startsWith(config.PREFIX)) return;
+if(message.channel.type == "dm") return;
+
+var prefix = config.PREFIX;
+var args = message.content.slice(prefix.length).trim().split(/ +/g);
+var command = args.shift().toLowerCase()
+
+let Clogs = message.guild.channels.find(x => x.name == "logs");
+
 
 
 if(command == "register") {
