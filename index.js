@@ -65,25 +65,6 @@ client.on("ready", () => console.log("I'm onlin and ready!"));
 
 client.on("message", async message  => {
 
-  setTimeout(() => {
-
-    if(member.roles.find(r => r.name == "Unregistered")) 
-    
-    return 
-
-    message.author.send(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next minutes you will be kicked**`)
-  
-  }, 30000);
-
-  setTimeout(() => {
-
-  if(member.roles.find(r => r.name == "Unregistered"))
-  
-  member.kick('Failed to register')
-  
-  }, 60000);
-
-
 if(message.author.bot) return;
 if(!message.content.startsWith(config.PREFIX)) return;
 if(message.channel.type == "dm") return;
@@ -94,6 +75,23 @@ var command = args.shift().toLowerCase()
 
 let Clogs = message.guild.channels.find(x => x.name == "logs");
 
+setTimeout(() => {
+
+  if(member.roles.find(r => r.name == "Unregistered")) 
+  
+  return 
+
+  message => message.author.send(6000)(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next minutes you will be kicked**`);
+
+});
+
+setTimeout(() => {
+
+if(member.roles.find(r => r.name == "Unregistered"))
+
+member.kick('Failed to register')
+
+}, 60000);
 
 
 if(command == "register") {
