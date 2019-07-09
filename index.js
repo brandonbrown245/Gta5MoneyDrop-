@@ -431,7 +431,7 @@ member.guild.channels.get("594183892651737108").send({files : [await canvas.toBu
 
 })
 
-client.on( async (member , role , find) => {
+client.on("guildMemberAdd" , async (member , role , find) => {
 
 if(!message.member.role.find(r => r.name == "Unregistered")) 
     
