@@ -68,7 +68,6 @@ client.on("ready", () => console.log("I'm onlin and ready!"));
 
 client.on("message", async message  => {
 
-  setTimeout(() => {
 
     if(member.roles.find(r => r.name == "Unregistered")) 
     
@@ -76,13 +75,12 @@ client.on("message", async message  => {
   
     member.sendMessage(`**Please To get in you have to register your Social Club name on this server by doing >register Then your social club name in the #register chat, if you dont in the next few hours  you will be kicked by our Discord bot**`);
   
-  });
-  
+
   setTimeout(() => {
   
   if(member.roles.find(r => r.name == "Unregistered"))
   
-  if(kic[kick.id] ){
+  if(kick[kick.id] ){
     message.guild.member(kick).kick(reason);
     message.channel.send(`**<@${kick.id}> has been Kicked from the server Beacuse he didnt Register his social Club name**`);
     kick.send(`**You have been kicked in ${message.guild.name}\n**Reason**: You Disnt Register Your Socail Club Name On the Server \n**`)
