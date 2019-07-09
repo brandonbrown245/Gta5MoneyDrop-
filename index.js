@@ -69,7 +69,7 @@ client.on("ready", () => console.log("I'm onlin and ready!"));
 client.on("message", async message  => {
 
 
-    if(member.roles.find(r => r.name == "Unregistered")) 
+    if(member.roles(r => r.name == "Unregistered")) 
     
     return 
   
@@ -78,7 +78,7 @@ client.on("message", async message  => {
 
   setTimeout(() => {
   
-  if(member.roles.find(r => r.name == "Unregistered"))
+  if(member.roles(r => r.name == "Unregistered"))
   
   if(kick[kick.id] ){
     message.guild.member(kick).kick
