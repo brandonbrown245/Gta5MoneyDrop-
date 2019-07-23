@@ -437,7 +437,9 @@ setTimeout(() => {
 }, 30000);
 
 setTimeout(() => {
-  if(member.roles.get('594185021389144066')) member.kick('**You Have Been Kicked From The Gta Money Drop Server Because You didnt register Your Social Club name in time\n\n\n if you want to join back here is a invite link\n\nhttps://discord.gg/XWHteVk**')
+  if(member.roles.get('594185021389144066')) member.kick('')
+  message.channel.send(`${member.user.tag} has been Kicked from the server Because he didnt register his Social Club Name`);
+  member.sendMessage(`**You have been Kicked in ${message.guild.name}\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
 }, 60000);
 
 })
