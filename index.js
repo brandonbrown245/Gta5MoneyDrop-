@@ -392,6 +392,9 @@ Clogs.send(embed2)
 
 client.on("guildMemberAdd", async (member) => {
 
+
+
+
 let Clogs = member.guild.channels.find(x => x.name == "mod-log")
 let embed2 = new Discord.RichEmbed()
 .setTitle("MEMBER JOINED")
@@ -428,6 +431,12 @@ let avatar1 = await request.get(member.user.displayAvatarURL)
 let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
+
+ if(member.roles.get('594185021389144066')) member.sendMessage(`Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked`)
+  
+setTimeout(() => {
+  if(member.roles.get('594185021389144066')) member.kick.sendMessage('Failed to register')
+}, 4000);
 
 })
 
