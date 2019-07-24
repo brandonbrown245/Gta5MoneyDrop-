@@ -431,19 +431,20 @@ member.guild.channels.get("594183892651737108").send({files : [await canvas.toBu
 
 setTimeout(() => {
   if(member.roles.get('594185021389144066'))
-  let verifyEmbed7 = new Discord.RichEmbed()
+  let embed2111 = new Discord.RichEmbed()   
   .setColor('#36393f')
   .setDescription('**To Get Into the Free Money Drops You Have To Register Your Social Club Name On This Server By Doing >register Then Your Social Club Name In The #register Chat If You Dont In The Next Two Hours You Will Be Kicked**')
-  member.sendMessage(verifyEmbed7);
- }, 30000);
+  Clogs.member.sendMessage(embed2111)
+}, 30000);
  
  setTimeout(() => {
    if(member.roles.get('594185021389144066')) member.kick('')
    member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
-   let verifyEmbed4 = new Discord.RichEmbed()
+   let embed211 = new Discord.RichEmbed()   
    .setColor('#36393f')
    .setDescription('**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**')
-   member.sendMessage(verifyEmbed4);
+   Clogs.member.sendMessage(embed211)
+
  }, 60000);
 
 });
