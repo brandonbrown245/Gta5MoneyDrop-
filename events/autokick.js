@@ -1,4 +1,4 @@
-module.exports = async (member, ) => {
+module.exports = member => {
 
 setTimeout(() => {
     if(member.roles.get.find(r => r.name == "Unregistered")) member.sendMessage(`**Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked**`)
