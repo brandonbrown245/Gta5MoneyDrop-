@@ -70,7 +70,16 @@ client.on("ready", () => console.log("I'm onlin and ready!"));
 client.on("message", async message  => {
 
 
-  
+  setTimeout(() => {
+    if(member.roles.get('594185021389144066')) member.sendMessage(`**Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked**`)
+   }, 30000);
+   
+   setTimeout(() => {
+     if(member.roles.get('594185021389144066')) member.kick('')
+     member.guild.channels.get("594183922049482778").send(`${member.user.tag} has been Kicked from the server Because he didnt register his Social Club Name`);
+     member.sendMessage(`**You have been Kicked in **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
+   }, 60000);
+   
 
 if(message.author.bot) return;
 if(!message.content.startsWith(config.PREFIX)) return;
@@ -87,7 +96,8 @@ let Clogs = message.guild.channels.find(x => x.name == "logs");
 if(command == "register") {
 message.delete();
 let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
-if(data[message.author.id]) return message.reply("You are already registered").then(message => message.delete(6000));
+//if(data[message.author.id]) return message.reply("You are already registered").then(message => message.delete(6000));
+if (message.channel.name !== 'Registered') return message.reply('You are already registered').then(message => message.delete(6000));
 
 if (message.channel.name !== 'register') return message.reply('**You must Register your social club name in the register chat**').then(message => message.delete(6000));
 let socialName = args.join(" ")
@@ -111,7 +121,7 @@ let embed9 = new Discord.RichEmbed()
 message.author.send(embed9);
 
 let embed3 = new Discord.RichEmbed()
-.setDescription(`**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n\nThis is The Social Club Name You Registered With ${args} If it is not Right just do >unregister in the unregister chat**`)
+.setDescription(`**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n\nThis is The Social Club Name You Registered With '${args}' If it is not Right just do >unregister in the unregister chat**`)
 .setColor("#42f45c");
 message.author.send(embed3);
 
@@ -131,12 +141,12 @@ cnl.send({embed})
 
 if(command == "unregister") {
 message.delete();
-let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
+//let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
 message.delete();
-message.channel.send("You are not Registered").then(message => message.delete(6000));
+//message.channel.send("You are not Registered").then(message => message.delete(6000));
 delete data[message.author.id]
-fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
+//fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
 message.channel.send("Your account has been successfully UnRegistered").then(message => message.delete(6000));
