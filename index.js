@@ -98,7 +98,17 @@ let verifyEmbed = new Discord.RichEmbed()
 .setDescription('Your account has been successfully Registered.')
 message.channel.send(verifyEmbed);
 
+<<<<<<< HEAD
+let embed77 = new Discord.RichEmbed()
+.setAuthor(message.member.displayName, message.author.displayAvatarURL)
+.setColor('#36393f')
+.setDescription(`**${message.author.tag} This is The Social Club Name You Registered With ${args} If it is not Right just do >unregister in the unregister chat**`).then(message => message.delete(6000));
+message.channel.send(embed77);
+
+let embed4 = new Discord.RichEmbed()
+=======
 let embed9 = new Discord.RichEmbed()
+>>>>>>> 2a79d5033c2198caa437a5d05c6f4cd364a28d65
 .setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
 .setColor("#42f45c");
 message.author.send(embed9);
