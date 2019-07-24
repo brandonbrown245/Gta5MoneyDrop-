@@ -429,18 +429,7 @@ let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 
-
-
 });
-
-client.on("guildMemberUpdate", async (oldMember, newMember) => {
-
-Array.prototype.diff = function(a) {
-return this.filter(function(i) {
-return a.indexOf(i) < 0;
-});
-
-};
 setTimeout(() => {
   if(member.roles.get('594185021389144066'))
   let embed2111 = new Discord.RichEmbed()   
@@ -458,6 +447,16 @@ setTimeout(() => {
    Clogs.member.sendMessage(embed211)
 
  }, 60000);
+
+client.on("guildMemberUpdate", async (oldMember, newMember) => {
+
+Array.prototype.diff = function(a) {
+return this.filter(function(i) {
+return a.indexOf(i) < 0;
+});
+
+};
+
 
  
 let Clogs = newMember.guild.channels.find(x => x.name == "mod-log")
