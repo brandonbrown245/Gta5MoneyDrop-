@@ -3,11 +3,16 @@ var Discord = require("discord.js");
 var request = require("node-superfetch");
 var moment = require("moment");
 var randomPuppy = require('random-puppy');
+var member = ('member')
+var find = ('find')
+var role = ('role')
 var m = require("moment-duration-format");
 let cpuStat = require("cpu-stat")
 var superagent = require('superagent')
 var ms = require('ms');
-let os = require('os')
+var id = ('id');
+var roles = ('roles');
+let os = require('os');
 var rn = require('random-number');
 var { RichEmbed } = require('discord.js');
 var ms = require("ms")
@@ -40,7 +45,6 @@ return i + "rd";
 return i + "th";
 }
 
-
 fs.readdir('./events/', (err, files) => {
   if (err) return console.error;
   files.forEach(file => {
@@ -53,11 +57,11 @@ fs.readdir('./events/', (err, files) => {
 
   });
 
+
 var Queue = new Array();
 var Active = [false, false]
 
 client.on("ready", () => console.log("I'm onlin and ready!"));
-
 
 client.on("message", async message  => {
 
@@ -71,10 +75,12 @@ var command = args.shift().toLowerCase()
 
 let Clogs = message.guild.channels.find(x => x.name == "logs");
 
+
 if(command == "register") {
 message.delete();
 let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
-if(data[message.author.id]) return message.reply("You are already registered").then(message => message.delete(6000));
+//if(data[message.author.id]) return message.reply("You are already registered").then(message => message.delete(6000));
+if (message.channel.name !== 'Registered') return message.reply('You are already registered').then(message => message.delete(6000));
 
 if (message.channel.name !== 'register') return message.reply('**You must Register your social club name in the register chat**').then(message => message.delete(6000));
 let socialName = args.join(" ")
@@ -92,6 +98,7 @@ let verifyEmbed = new Discord.RichEmbed()
 .setDescription('Your account has been successfully Registered.')
 message.channel.send(verifyEmbed);
 
+<<<<<<< HEAD
 let embed77 = new Discord.RichEmbed()
 .setAuthor(message.member.displayName, message.author.displayAvatarURL)
 .setColor('#36393f')
@@ -99,12 +106,15 @@ let embed77 = new Discord.RichEmbed()
 message.channel.send(embed77);
 
 let embed4 = new Discord.RichEmbed()
+=======
+let embed9 = new Discord.RichEmbed()
+>>>>>>> 2a79d5033c2198caa437a5d05c6f4cd364a28d65
 .setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
 .setColor("#42f45c");
-message.author.send(embed4);
+message.author.send(embed9);
 
 let embed3 = new Discord.RichEmbed()
-.setDescription("**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he start's a money drop then you just join his lobby just if he says he is doing a money drop**")
+.setDescription(`**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n\nThis is The Social Club Name You Registered With '${args}' If it is not Right just do >unregister in the unregister chat**`)
 .setColor("#42f45c");
 message.author.send(embed3);
 
@@ -117,18 +127,19 @@ const embed = new Discord.RichEmbed()
 .setThumbnail(message.author.displayAvatarURL)
 .setColor("#42f45c");
 cnl.send({embed})
+
 .catch(e => logger.error(e))
 
 }
 
 if(command == "unregister") {
 message.delete();
-let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
+//let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
 message.delete();
-message.channel.send("You are not Registered").then(message => message.delete(6000));
+//message.channel.send("You are not Registered").then(message => message.delete(6000));
 delete data[message.author.id]
-fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
+//fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
 message.channel.send("Your account has been successfully UnRegistered").then(message => message.delete(6000));
@@ -172,9 +183,7 @@ Queue = new Array();
 message.channel.send(`**<@&594185059968221188> Money Drop Has Stopped**`)
 message.guild.channels.get(config.QLOGS).send(util.sendEmbed(message, `The current Drop by ${message.author} has been stopped`));
 
-
 }
-
 
 if(command == "nsfw"){
 message.delete();
@@ -384,6 +393,9 @@ Clogs.send(embed2)
 
 client.on("guildMemberAdd", async (member) => {
 
+
+
+
 let Clogs = member.guild.channels.find(x => x.name == "mod-log")
 let embed2 = new Discord.RichEmbed()
 .setTitle("MEMBER JOINED")
@@ -420,13 +432,8 @@ let avatar1 = await request.get(member.user.displayAvatarURL)
 let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
-setTimeout(() => {
-  if(member.roles.get('594185021389144066')) member.user.send(`Please, To get in you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat, if you dont in the next minutes you will be kicked`)
-}, 1000);
-setTimeout(() => {
-  if(member.roles.get('594185021389144066')) member.kick('Failed to register')
-}, 2000);
-})
+
+});
 
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
 
