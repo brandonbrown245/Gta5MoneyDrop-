@@ -180,9 +180,7 @@ Queue = new Array();
 message.channel.send(`**<@&594185059968221188> Money Drop Has Stopped**`)
 message.guild.channels.get(config.QLOGS).send(util.sendEmbed(message, `The current Drop by ${message.author} has been stopped`));
 
-
 }
-
 
 if(command == "nsfw"){
 message.delete();
