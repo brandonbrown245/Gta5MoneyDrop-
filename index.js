@@ -98,7 +98,6 @@ let embed77 = new Discord.RichEmbed()
 .setDescription(`**${message.author.tag} This is The Social Club Name You Registered With ${args} If it is not Right just do >unregister in the unregister chat**`).then(message => message.delete(6000));
 message.channel.send(embed77);
 
-
 let embed4 = new Discord.RichEmbed()
 .setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
 .setColor("#42f45c");
