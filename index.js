@@ -430,10 +430,7 @@ member.guild.channels.get("594183892651737108").send({files : [await canvas.toBu
 
   if(member.roles.get('594185021389144066')) member.kick('')
   member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
-  let verifyEmbed15 = new Discord.RichEmbed()
-  .setColor("RANDOM")
-  .setDescription(`**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
-  member.sendMessage(verifyEmbed15)
+  member.sendMessage(`**You Have Been Kicked In **Gta Money Drop**\n\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
 
   }, 10000);
 
