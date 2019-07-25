@@ -434,7 +434,7 @@ setTimeout(() => {
   .setColor("#42f45c");
   member.sendMessage(embed21);
   
-  }, 60000);
+  }, 10000);
 
 });
 
