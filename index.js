@@ -438,15 +438,7 @@ message.author.send(embed20);
 
 }, 30000);
 
-setTimeout(() => {
-if(member.roles.get('594185021389144066')) member.kick('')
-member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
-let embed21 = new Discord.RichEmbed()
-.setDescription('**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**')
-.setColor("#42f45c");
-message.author.send(embed21);
 
-}, 60000);
 
 
 
