@@ -427,12 +427,12 @@ await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 
   setTimeout(() => {
-  member.sendMessage(`**You Have Been Kicked In **Gta Money Drop**\n\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
+    
   if(member.roles.get('594185021389144066')) member.kick('')
   member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
+  member.sendMessage(`**You Have Been Kicked In **Gta Money Drop**\n\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
 
   }, 10000);
-
 
 });
 
