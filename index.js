@@ -426,15 +426,17 @@ let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 
-setTimeout(() => {
+  setTimeout(() => {
+
   if(member.roles.get('594185021389144066')) member.kick('')
   member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
-  let verifyEmbed21 = new Discord.RichEmbed() 
-   .setDescription('**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**')
-  .setColor("#42f45c");
-  member.sendMessage(verifyEmbed21);
-  
+  let embed15 = new Discord.RichEmbed()
+  .setColor("RANDOM")
+  .setDescription(`**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
+  Clogs.send(embed15)
+
   }, 10000);
+
 
 });
 
