@@ -433,7 +433,7 @@ member.guild.channels.get("594183892651737108").send({files : [await canvas.toBu
   let embed15 = new Discord.RichEmbed()
   .setColor("RANDOM")
   .setDescription(`**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
-  Clogs.member.sendMessage(embed15)
+  member.sendMessage(embed15)
 
   }, 10000);
 
