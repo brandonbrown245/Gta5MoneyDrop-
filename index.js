@@ -430,14 +430,14 @@ await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 
 
-//setTimeout(() => {
-//  if(member.roles.get('594185021389144066'))
- // let embed2111 = new Discord.RichEmbed()   
-  //.setColor('#36393f')
-  //.setDescription('**To Get Into the Free Money Drops You Have To Register Your Social Club Name On This Server By Doing >register Then Your Social Club Name In The #register Chat If You Dont In The Next Two Hours You Will Be Kicked**')
-  //Clogs.member.sendMessage(embed2111)
+setTimeout(() => {
+if(member.roles.get('594185021389144066'))
+ let embed241 = new Discord.RichEmbed()   
+.setColor('#36393f')
+  .setDescription('**To Get Into the Free Money Drops You Have To Register Your Social Club Name On This Server By Doing >register Then Your Social Club Name In The #register Chat If You Dont In The Next Two Hours You Will Be Kicked**')
+  Clogs.member.sendEmbed(embed241)
 
-//}, 30000);
+}, 30000);
 
 setTimeout(() => {
   if(member.roles.get('594185021389144066')) member.kick('')
@@ -445,7 +445,7 @@ setTimeout(() => {
   let embed211 = new Discord.RichEmbed()   
   .setColor('#36393f')
   .setDescription('**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**')
-  Clogs.member.sendMessage(embed211)
+  Clogs.member.sendEmbed(embed211)
 
 }, 60000);
 
