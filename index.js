@@ -429,7 +429,6 @@ let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 
-});
 
 //setTimeout(() => {
 //  if(member.roles.get('594185021389144066'))
@@ -440,15 +439,17 @@ member.guild.channels.get("594183892651737108").send({files : [await canvas.toBu
 
 //}, 30000);
 
- setTimeout(() => {
-   if(member.roles.get('594185021389144066')) member.kick('')
-   member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
-   let embed211 = new Discord.RichEmbed()   
-   .setColor('#36393f')
-   .setDescription('**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**')
-   Clogs.member.sendMessage(embed211)
+setTimeout(() => {
+  if(member.roles.get('594185021389144066')) member.kick('')
+  member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
+  let embed211 = new Discord.RichEmbed()   
+  .setColor('#36393f')
+  .setDescription('**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**')
+  Clogs.member.sendMessage(embed211)
 
- }, 60000);
+}, 60000);
+
+});
 
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
 
@@ -458,13 +459,12 @@ return a.indexOf(i) < 0;
 });
 
 };
-
-
  
 let Clogs = newMember.guild.channels.find(x => x.name == "mod-log")
 const log = await newMember.guild.fetchAuditLogs({type:'MEMBER_ROLE_UPDATE'}).then(audit => audit.entries.first())
 
 if (oldMember._roles.diff(newMember._roles).length == 0) {
+
 
 var roldado = newMember._roles.diff(oldMember._roles)
 var rol = newMember.guild.roles.get(roldado.toString())
