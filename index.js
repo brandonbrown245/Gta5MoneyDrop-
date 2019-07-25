@@ -387,10 +387,7 @@ Clogs.send(embed2)
 
 })
 
-client.on("guildMemberAdd", async (member , message ) => {
-
-
-
+client.on("guildMemberAdd", async (member , message , ) => {
 
 let Clogs = member.guild.channels.find(x => x.name == "mod-log")
 let embed2 = new Discord.RichEmbed()
@@ -429,20 +426,15 @@ let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 
-
-
-
 setTimeout(() => {
   if(member.roles.get('594185021389144066')) member.kick('')
   member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
   let embed21 = new Discord.RichEmbed()
   .setDescription('**You Have Been Kicked In **Gta Money Drop**\n**Reason**: Didnt Register Social Club Name On The Server\n**')
   .setColor("#42f45c");
-  message.author.send(embed21);
+  member.sendMessage(embed21);
   
   }, 60000);
-
-
 
 });
 
