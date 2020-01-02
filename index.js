@@ -133,7 +133,7 @@ cnl.send({embed})
 
 if(command == "unregister") {
 message.delete();
-if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
+if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
 
 //let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
