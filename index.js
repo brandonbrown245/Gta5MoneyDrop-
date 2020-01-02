@@ -116,7 +116,7 @@ message.channel.send(verifyEmbed);
 
 let embed77 = new Discord.RichEmbed()
 .setColor('#36393f')
-.setDescription(`The Social Club Name You Registered With is **${args}** If it is not Right just do **>unregister** in the unregister chat and register with the right social club name\n\n\nNow that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have\n\n\nThe money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n`);
+.setDescription(`The Social Club Name You Registered With is **${args}** If it is not Right just do **>unregister** in the unregister chat and register with the right social club name\n\nNow that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have\n\nThe money Dropper Sc name is **Batman_456** he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n`);
 message.author.send(embed77);
 
 
