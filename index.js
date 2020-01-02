@@ -87,6 +87,7 @@ let socialName = args.join(" ")
 if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
 data[message.author.id] = socialName
 
+
 fs.writeFileSync('./userdata.json', JSON.stringify(data,null,2))
 
 message.member.removeRole("594185021389144066")
