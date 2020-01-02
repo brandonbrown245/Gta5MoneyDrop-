@@ -116,7 +116,7 @@ message.author.send(embed3);
 
 let embed77 = new Discord.RichEmbed()
 .setColor('#36393f')
-.setDescription(`The Social Club Name You Registered With is **${args}** If it is not Right just do **>unregister** in the unregister chat and register with the right social club name**`);
+.setDescription(`The Social Club Name You Registered With is **${args}** If it is not Right just do **>unregister** in the unregister chat and register with the right social club name`);
 message.author.send(embed77);
 
 
