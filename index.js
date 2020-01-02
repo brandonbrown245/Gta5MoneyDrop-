@@ -121,8 +121,8 @@ const cnl = client.channels.get('594187400339783721');
 const embed = new Discord.RichEmbed()
 .setAuthor(`${message.author.tag}`)
 .addField('Social Club:', ` ${args}`)
+.setColor("#42f45c")
 .setThumbnail(message.author.displayAvatarURL)
-.setColor("#42f45c");
 cnl.send({embed})
 
 .catch(e => logger.error(e))
