@@ -187,7 +187,6 @@ message.delete();
 if (!message.channel.nsfw) return message.reply("You can only use this command on nsfw channels!").then(message => message.delete(6000));
 var subreddits = [
 'NSFW_Wallpapers',
-'SexyWallpapers',
 'HighResNSFW',
 'nsfw_hd',]
 
