@@ -134,15 +134,17 @@ cnl.send({embed})
 if(command == "unregister") {
 message.delete();
 if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
+
 //let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
+if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
+
 message.delete();
 //message.channel.send("You are not Registered").then(message => message.delete(6000));
 //delete data[message.author.id]
 //fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
-if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
 }
     
 if(command == "roleinfo") {
