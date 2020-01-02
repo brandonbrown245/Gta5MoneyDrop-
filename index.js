@@ -78,7 +78,6 @@ let Clogs = message.guild.channels.find(x => x.name == "logs");
 
 if(command == "register") {
 message.delete();
-//if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
 
 if (message.channel.name !== 'register') return message.reply('**You must Register your social club name in the register chat**').then(message => message.delete(6000));
 let socialName = args.join(" ")
@@ -103,15 +102,12 @@ message.channel.send(embed77);
 let embed4 = new Discord.RichEmbed()
 .setColor("#42f45c")
 .setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
-message.author.send(embed9);
+message.author.send(embed4);
 
 let embed3 = new Discord.RichEmbed()
 .setColor("#42f45c")
 .setDescription(`**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n\nThis is The Social Club Name You Registered With '${args}' If it is not Right just do >unregister in the unregister chat**`)
 message.author.send(embed3);
-
-let guild = message.guild;
-
 
 const cnl = client.channels.get('594187400339783721');
 const embed = new Discord.RichEmbed()
@@ -123,9 +119,7 @@ cnl.send({embed})
 
 .catch(e => logger.error(e))
 
-
-
-
+let guild = message.guild;
 
 }
 
