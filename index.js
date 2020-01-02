@@ -87,8 +87,8 @@ if(!socialName) return message.reply("Please specify your Social Club username a
 message.member.removeRole("594185021389144066")
 message.member.addRole("594185059968221188")
 
-const cnl = client.channels.get('594187400339783721');
-const embed = new Discord.RichEmbed()
+let cnl = client.channels.get('594187400339783721');
+let embed = new Discord.RichEmbed()
 .setAuthor(`${message.author.tag}`)
 .setColor("#42f45c")
 .addField('Social Club:', ` ${args}`)
