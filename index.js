@@ -189,12 +189,7 @@ var subreddits = [
 'NSFW_Wallpapers',
 'SexyWallpapers',
 'HighResNSFW',
-'nsfw_hd',
-'UHDnsfw',
-'porn',
-'PAWG',
-'BDSM',
-'Fifty_Shades_of_Grey']
+'nsfw_hd',]
 
 var sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
 
