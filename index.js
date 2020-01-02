@@ -88,17 +88,6 @@ if(!socialName) return message.reply("Please specify your Social Club username a
 message.member.removeRole("594185021389144066")
 message.member.addRole("594185059968221188")
 
-const cnl = client.channels.get('594187400339783721');
-const embed = new Discord.RichEmbed()
-.setAuthor(`${message.author.tag}`)
-.setColor("#42f45c")
-.addField('Social Club:', ` ${args}`)
-.setThumbnail(message.author.displayAvatarURL)
-cnl.send({embed})
-
-.catch(e => logger.error(e))
-
-
 let verifyEmbed = new Discord.RichEmbed()
 .setAuthor(message.member.displayName, message.author.displayAvatarURL)
 .setColor('#36393f')
@@ -112,16 +101,30 @@ let embed77 = new Discord.RichEmbed()
 message.channel.send(embed77);
 
 let embed4 = new Discord.RichEmbed()
+.setColor("#42f45c")
 .setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
-.setColor("#42f45c");
 message.author.send(embed9);
 
 let embed3 = new Discord.RichEmbed()
+.setColor("#42f45c")
 .setDescription(`**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n\nThis is The Social Club Name You Registered With '${args}' If it is not Right just do >unregister in the unregister chat**`)
-.setColor("#42f45c");
 message.author.send(embed3);
 
 let guild = message.guild;
+
+
+const cnl = client.channels.get('594187400339783721');
+const embed = new Discord.RichEmbed()
+.setAuthor(`${message.author.tag}`)
+.setColor("#42f45c")
+.addField('Social Club:', ` ${args}`)
+.setThumbnail(message.author.displayAvatarURL)
+cnl.send({embed})
+
+.catch(e => logger.error(e))
+
+
+
 
 
 }
