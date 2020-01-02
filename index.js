@@ -79,18 +79,11 @@ let Clogs = message.guild.channels.find(x => x.name == "logs");
 if(command == "register") {
 message.delete();
 if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
-//let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
-//if(data[message.author.id]) return message.reply("You are already registered").then(message => message.delete(6000));
-//if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
-
 
 if (message.channel.name !== 'register') return message.reply('**You must Register your social club name in the register chat**').then(message => message.delete(6000));
 let socialName = args.join(" ")
 if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
-//data[message.author.id] = socialName
 
-
-//fs.writeFileSync('./userdata.json', JSON.stringify(data,null,2))
 
 message.member.removeRole("594185021389144066")
 message.member.addRole("594185059968221188")
@@ -138,7 +131,7 @@ message.delete();
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
-if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
+if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already UnRegistered").then(message => message.delete(6000));
 
 if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
 
