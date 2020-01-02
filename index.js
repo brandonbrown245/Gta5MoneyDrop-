@@ -119,7 +119,6 @@ let embed77 = new Discord.RichEmbed()
 .setDescription(`The Social Club Name You Registered With is **${args}** If it is not Right just do **>unregister** in the unregister chat and register with the right social club name**`);
 message.author.send(embed77);
 
-let guild = message.guild;
 
 }
 
