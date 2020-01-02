@@ -86,17 +86,27 @@ if(!socialName) return message.reply("Please specify your Social Club username a
 message.member.removeRole("594185021389144066")
 message.member.addRole("594185059968221188")
 
+let cnl = client.channels.get('594187400339783721');
+let embed = new Discord.RichEmbed()
+.setAuthor(`${message.author.tag}`)
+.setColor("#42f45c")
+.addField('Social Club:', ` ${args}`)
+.setThumbnail(message.author.displayAvatarURL)
+cnl.send({embed})
+
+.catch(e => logger.error(e))
+
 let verifyEmbed = new Discord.RichEmbed()
 .setAuthor(message.member.displayName, message.author.displayAvatarURL)
-.setColor('#36393f')
 .setDescription('Your account has been successfully Registered.')
+.setColor('#36393f')
 message.channel.send(verifyEmbed);
 
 let embed77 = new Discord.RichEmbed()
 .setAuthor(message.member.displayName, message.author.displayAvatarURL)
 .setColor('#36393f')
-.setDescription(`**${message.author.tag} This is The Social Club Name You Registered With ${args} If it is not Right just do >unregister in the unregister chat**`).then(message => message.delete(6000));
-message.channel.send(embed77);
+.setDescription(`**${message.author.tag} This is The Social Club Name You Registered With ${args} If it is not Right just do >unregister in the unregister chat**`);
+message.author.send(embed77);
 
 let embed4 = new Discord.RichEmbed()
 .setColor("#42f45c")
