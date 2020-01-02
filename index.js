@@ -88,6 +88,17 @@ if(!socialName) return message.reply("Please specify your Social Club username a
 message.member.removeRole("594185021389144066")
 message.member.addRole("594185059968221188")
 
+const cnl = client.channels.get('594187400339783721');
+const embed = new Discord.RichEmbed()
+.setAuthor(`${message.author.tag}`)
+.setColor("#42f45c")
+.addField('Social Club:', ` ${args}`)
+.setThumbnail(message.author.displayAvatarURL)
+cnl.send({embed})
+
+.catch(e => logger.error(e))
+
+
 let verifyEmbed = new Discord.RichEmbed()
 .setAuthor(message.member.displayName, message.author.displayAvatarURL)
 .setColor('#36393f')
@@ -112,15 +123,6 @@ message.author.send(embed3);
 
 let guild = message.guild;
 
-const cnl = client.channels.get('594187400339783721');
-const embed = new Discord.RichEmbed()
-.setAuthor(`${message.author.tag}`)
-.addField('Social Club:', ` ${args}`)
-.setColor("#42f45c")
-.setThumbnail(message.author.displayAvatarURL)
-cnl.send({embed})
-
-.catch(e => logger.error(e))
 
 }
 
