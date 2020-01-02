@@ -134,7 +134,7 @@ message.delete();
 let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
 message.delete();
-//message.channel.send("You are not Registered").then(message => message.delete(6000));
+message.channel.send("You are not Registered").then(message => message.delete(6000));
 delete data[message.author.id]
 fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
 message.member.addRole("594185021389144066")
