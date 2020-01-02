@@ -78,7 +78,7 @@ let Clogs = message.guild.channels.find(x => x.name == "logs");
 
 if(command == "register") {
 message.delete();
-if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
+//if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already Registered").then(message => message.delete(6000));
 
 if (message.channel.name !== 'register') return message.reply('**You must Register your social club name in the register chat**').then(message => message.delete(6000));
 let socialName = args.join(" ")
