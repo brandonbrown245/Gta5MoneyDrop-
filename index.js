@@ -118,7 +118,7 @@ if (message.channel.name !== 'unregister') return message.reply('**You must Unre
 
 let embed79 = new Discord.RichEmbed()
 .setColor('#36393f')
-.setDescription(`Your account has been successfully UnRegistered\n\nYou will get kicked from the server in 24 hours if you do not register back\n\nYou Will also get unfriened on social club as well\n\n Here is a Discord invite link if you would like to join back again :https://discord.gg/FPxpTjn`);
+.setDescription(`Your account has been successfully Unregistered\n\nYou will get kicked from the server in 24 hours if you do not Register your Social Club Name\n\nYou will also get unfriened on social club as well\n\n Here is a Discord invite link if you would like to join back again **https://discord.gg/FPxpTjn**`);
 message.author.send(embed79);
 
 message.member.addRole("594185021389144066")
