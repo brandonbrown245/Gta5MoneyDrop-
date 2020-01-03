@@ -112,9 +112,9 @@ message.author.send(embed77);
 if(command == "unregister") {
 message.delete();
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
-if(!socialName2) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
+if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
 
-let socialName2 = args.join(" ")
+let socialName = args.join(" ")
 
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
