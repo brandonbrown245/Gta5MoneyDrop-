@@ -121,7 +121,7 @@ message.member.removeRole("594185059968221188")
 let cnl = client.channels.get('662680373276311585');
 let verifyEmbed = new Discord.RichEmbed()
 .setAuthor(message.member.displayName, message.author.displayAvatarURL)
-.setDescription('Social Club:', ` ${args}`)
+.setDescription(`Social Club: ${args}`)
 .setColor('#36393f')
 cnl.send(verifyEmbed);
 
