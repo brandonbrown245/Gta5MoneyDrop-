@@ -115,11 +115,8 @@ message.delete();
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
-if(!message.member.roles.find(r => r.name == "Registered")) return message.reply("You Are Already UnRegistered").then(message => message.delete(6000));
 
-if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
-
-message.delete();
+if(!message.member.roles.find(r => r.name == "Unregistered")) return message.author.send("Your account has been successfully UnRegistered")//.then(message => message.delete(6000)); 
 
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
