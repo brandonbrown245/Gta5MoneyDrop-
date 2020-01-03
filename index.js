@@ -116,7 +116,12 @@ message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
 
-if(!message.member.roles.find(r => r.name == "Unregistered")) return message.author.send("Your account has been successfully UnRegistered")//.then(message => message.delete(6000)); 
+let embed79 = new Discord.RichEmbed()
+.setColor('#36393f')
+.setDescription(`Your account has been successfully UnRegistered`);
+message.author.send(embed79);
+
+//if(!message.member.roles.find(r => r.name == "Unregistered")) return message.author.send("Your account has been successfully UnRegistered")//.then(message => message.delete(6000)); 
 
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
