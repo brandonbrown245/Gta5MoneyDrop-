@@ -120,7 +120,13 @@ message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
 
 client.fetchUser("594178042851622913",false).then(user => {
-  user.send(`**${args}**`,) 
+
+let embed87 = new Discord.RichEmbed()
+.setAuthor(`${message.author.tag}`)
+.setColor("#42f45c")
+.addField('Social Club:', ` ${args}`)
+.setThumbnail(message.author.displayAvatarURL)
+user.send({embed87})
 })
 
 //let cnl = client.channels.get('662680373276311585');
