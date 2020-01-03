@@ -133,10 +133,8 @@ if(!message.member.roles.find(r => r.name == "Registered")) return message.reply
 
 if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
 
-let embed777 = new Discord.RichEmbed()
-.setColor('#36393f')
-.setDescription(`Your account has been successfully UnRegistered`);
-message.author.send(embed777);
+if(!message.member.roles.find(r => r.name == "Unregistered")) return message.author.send("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
+
 
 message.delete();
 //message.channel.send("You are not Registered").then(message => message.delete(6000));
