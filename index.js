@@ -111,15 +111,15 @@ message.author.send(embed77);
 
 if(command == "unregister") {
 message.delete();
+if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
+if(!socialName2) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
 
-let socialName = args.join(" ")
+let socialName2 = args.join(" ")
 
-//if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
 
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
-if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
-let cnl = client.channels.get('662680373276311585');
+//let cnl = client.channels.get('662680373276311585');
 
 //let embed6 = new Discord.RichEmbed()
 //.setAuthor(`${message.author.tag}`)
