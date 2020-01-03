@@ -123,8 +123,6 @@ let embed87 = new Discord.RichEmbed()
 .setThumbnail(message.author.displayAvatarURL)
 cnl.send({embed87})
 
-.catch(e => logger.error(e))
-
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
 
