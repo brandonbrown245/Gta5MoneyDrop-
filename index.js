@@ -116,9 +116,13 @@ if(!socialName2) return message.reply("Please specify your Social Club username 
 
 let socialName2 = args.join(" ")
 
-
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
+
+client.fetchUser("594178042851622913",false).then(user => {
+  user.send(`**${args}**`,) 
+})
+
 //let cnl = client.channels.get('662680373276311585');
 
 //let embed6 = new Discord.RichEmbed()
