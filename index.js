@@ -133,6 +133,9 @@ if(!message.member.roles.find(r => r.name == "Registered")) return message.reply
 
 if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
 
+if(!message.member.roles.find(r => r.name == "Unregistered")) return message.author("Your account has been successfully UnRegistered ").then(message => message.delete(6000)); 
+
+
 message.delete();
 //message.channel.send("You are not Registered").then(message => message.delete(6000));
 //delete data[message.author.id]
