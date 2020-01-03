@@ -102,30 +102,16 @@ let verifyEmbed = new Discord.RichEmbed()
 .setColor('#36393f')
 message.channel.send(verifyEmbed);
 
-
-
-//let embed4 = new Discord.RichEmbed()
-//.setColor("#42f45c")
-//.setDescription("**Now that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have**")
-//message.author.send(embed4);
-
-//let embed3 = new Discord.RichEmbed()
-//.setColor("#42f45c")
-//.setDescription(`**The money Dropper Sc name is Batman_456 he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n**`)
-//message.author.send(embed3);
-
 let embed77 = new Discord.RichEmbed()
 .setColor('#36393f')
 .setDescription(`The Social Club Name You Registered With is **${args}** If it is not Right just do **>unregister** in the unregister chat and register with the right social club name\n\nNow that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have\n\nThe money Dropper Sc name is **Batman_456** he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n`);
 message.author.send(embed77);
-
 
 }
 
 if(command == "unregister") {
 message.delete();
 
-//let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
 if (message.channel.name !== 'unregister') return message.reply('**You must Unregister in the unregister chat**').then(message => message.delete(6000));
@@ -133,15 +119,11 @@ if(!message.member.roles.find(r => r.name == "Registered")) return message.reply
 
 if(!message.member.roles.find(r => r.name == "Unregistered")) return message.reply("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
 
-if(!message.member.roles.find(r => r.name == "Unregistered")) return message.author.send("Your account has been successfully UnRegistered").then(message => message.delete(6000)); 
-
-
 message.delete();
-//message.channel.send("You are not Registered").then(message => message.delete(6000));
-//delete data[message.author.id]
-//fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
+
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
+
 }
     
 if(command == "roleinfo") {
@@ -172,6 +154,7 @@ message.channel.send(`**<@&594185059968221188> Money Drop Has Started**`)
 message.guild.channels.get(config.QLOGS).send(util.sendEmbed(message, `A new Drop has been created by ${message.author}`));
 
 }
+
 if(command == "close") {
 message.delete();
 if(!message.member.roles.find(r => r.name == "Money Dropper")) return message.reply("You can't use this command").then(message => message.delete(6000));
@@ -205,6 +188,7 @@ embed
 })
 
 }
+
 if(command == "addrole") {
 message.delete();
 if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel("You dont have `MANAGE_ROLES` permissions.**").then(message => message.delete(6000));
@@ -429,7 +413,7 @@ member.guild.channels.get("594183892651737108").send({files : [await canvas.toBu
   member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
   member.sendMessage(`**You Have Been Kicked In **Gta Money Drop**\n\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
 
-  }, 1000000);
+  }, 86400000);
 
 });
 
