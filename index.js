@@ -112,6 +112,8 @@ message.author.send(embed77);
 if(command == "unregister") {
 message.delete();
 
+let socialName = args.join(" ")
+
 if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
 
 message.member.addRole("594185021389144066")
