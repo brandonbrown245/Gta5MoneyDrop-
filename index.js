@@ -115,24 +115,20 @@ if (message.channel.name !== 'unregister') return message.reply('**You must Unre
 let socialName = args.join(" ")
 if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
 
-let cnl = client.channels.get('662680373276311585');
-let embed87 = new Discord.RichEmbed()
-.setAuthor(`${message.author.tag}`)
-.setColor("#42f45c")
-.addField('Social Club:', ` ${args}`)
-.setThumbnail(message.author.displayAvatarURL)
-cnl.send({embed87})
-
 message.member.addRole("594185021389144066")
 message.member.removeRole("594185059968221188")
+
+let cnl = client.channels.get('662680373276311585');
+let verifyEmbed = new Discord.RichEmbed()
+.setAuthor(message.member.displayName, message.author.displayAvatarURL)
+.setDescription('Social Club:', ` ${args}`)
+.setColor('#36393f')
+cnl.send(verifyEmbed);
 
 let embed79 = new Discord.RichEmbed()
 .setColor('#36393f')
 .setDescription(`Your account has been successfully Unregistered\n\nYou will get kicked from the server in 24 hours if you do not Register your Social Club Name\n\nYou will also get unfriened on social club as well\n\n Here is a Discord invite link if you would like to join back again\n\n**https://discord.gg/FPxpTjn**`);
 message.author.send(embed79);
-
-message.member.addRole("594185021389144066")
-message.member.removeRole("594185059968221188")
 
 }
     
