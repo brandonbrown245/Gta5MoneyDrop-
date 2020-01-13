@@ -36,22 +36,6 @@ Client.config = config
 const Commands = []
 
 
-// Get all general commands
-fs.readdir('./Commands/', (err, files) => {
-    files.forEach(f => {
-        let func = require('./Commands/' + f)
-        Commands.push({name : f.slice(0, -3), run : func})
-    })
-})
-
-// Get all general commands
-fs.readdir('./Data/', (err, files) => {
-    files.forEach(f => {
-        let func = require('./Data/' + f)
-        Commands.push({name : f.slice(0, -3), run : func})
-    })
-})
-
 // Command Handler
 Client.on('message', message => {
     
@@ -71,7 +55,7 @@ Client.on('message', message => {
     
         if(!name) return message.reply("You need to provide your Social Club nickname")
     
-        SQLite.open('./Data/userData.sqlite')
+        SQLite.open('./userData.sqlite/')
         .then(async sql => {
             let user = await sql.get(`SELECT * FROM users WHERE id = ${message.author.id}`)
             if(user) return message.reply("You are already registered!")
