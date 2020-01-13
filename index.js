@@ -18,7 +18,6 @@ let os = require('os');
 var rn = require('random-number');
 var { RichEmbed } = require('discord.js');
 var ms = require("ms")
-const { Client } = require('discord.js');
 const Enmap = require('enmap');
 var util = require("./handlers")
 var Canvas = require(`canvas`);
