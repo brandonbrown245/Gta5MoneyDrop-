@@ -2,6 +2,7 @@
 const Discord = require('discord.js')
 const fs = require('fs')
 const config = require('./config.json')
+const token = process.env.token
 
 const Client = new Discord.Client()
 
@@ -119,4 +120,4 @@ setTimeout(() => {
 }, 7.2e+7)
 
 
-Client.login(config.token)
+Client.login(token)
