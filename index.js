@@ -28,118 +28,15 @@ var ytdl = require('ytdl-core');
 var { createCanvas, loadImage } = require('canvas');
 var path = require("path")
 var user = user
+const config = require('./config.json')
 
+const Client = new Discord.Client()
+
+Client.on('ready', () => console.log('Bot Online!'))
 Client.config = config
 
 const Commands = []
 
-// Get all moderation commands
-fs.readdir('./Commands/Mod', (err, files) => {
-    files.forEach(f => {
-        let func = require('./Commands/Mod/' + f)
-        Commands.push({name : f.slice(0, -3), run : func})
-    })
-})
-
-// Get all general commands
-fs.readdir('./Commands/General', (err, files) => {
-    files.forEach(f => {
-        let func = require('./Commands/General/' + f)
-        Commands.push({name : f.slice(0, -3), run : func})
-    })
-})
-
-
-// Command Handler
-Client.on('message', message => {
-    
-    if(message.author.bot) return;
-    if(message.content.indexOf("!") !== 0) return;
-    if(message.channel.type == 'dm') return;
-    
-    const args = message.content.slice(1).trim().split(" ")
-    const command = args.shift()
-
-    if(Commands.find(c => c.name == command)) Commands.find(c => c.name == command).run(Client, message, args)
-})
-
-Client.on('guildMemberAdd', member => {
-    member.addRole(config.unregistered)
-    member.user.send(config.newmember)
-    .catch(() => {})
-    let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
-    data.push({time : +new Date() , id: member.id})
-    fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
-})
-
-
-// Timed muted handler 
-
-setInterval( async () => {
-    let data = JSON.parse(fs.readFileSync('./Data/mutes.json'))
-    if(data.length > 0){
-        data.forEach((m,i) => {
-            let hoy = new Date()
-            let warn = new Date(m.time)
-            if(hoy > warn) {
-                let guild = Client.guilds.get('664135583462981642')
-                let member = guild.member(m.id)
-                if(member) member.removeRole(config.muterole)
-                data.splice(i,1)
-                fs.writeFileSync('./Data/mutes.json', JSON.stringify(data),null,2)
-            }
-        })
-    }
-}, 60000)
-
-
-// Kick handler 
-setInterval( async () => {
-    let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
-    if(data.length > 0){
-        data.forEach(async (m,i) => {
-            let hoy = +new Date()
-            if((hoy - m.time) > 1.8e+6) {
-                let guild = Client.guilds.get('664135583462981642')
-                let member = guild.member(m.id)
-                if(member.roles.get(config.unregistered)) {
-                    await member.user.send(config.unregister_kick)
-                    .catch(() => {})
-                    member.kick()
-                }
-                data.splice(i,1)
-                fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
-            }
-        })
-    }
-}, 60000)
-
-
-// Livestream Notification
-
-var request = require("node-superfetch");
-
-setInterval(() => {
-  request.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCuYQmyVoKwqEnoM1gaDD9Kg&type=video&eventType=live&key=${config.youtubeapi}`)
-  .then(data => {
-    let search = data.body.items
-    if(search.length > 0) {
-        let temps = JSON.parse(fs.readFileSync('./Data/tempLive.json'))
-        if(temps.includes(search[0].id.videoId)) return;
-        else {
-            Client.channels.get(config.livechannel).send(`${config.livemessage} https://www.youtube.com/watch?v=${search[0].id.videoId}`)
-            temps.push(search[0].id.videoId)
-            fs.writeFileSync('./Data/tempLive.json', JSON.stringify(temps))
-        }
-
-    }
-})
-  
-}, 15000)
-
-setTimeout(() => {
-  fs.writeFileSync('./Data/tempLive.json', JSON.stringify([]))
-}, 7.2e+7)
 
 
 
@@ -189,6 +86,39 @@ var command = args.shift().toLowerCase()
 
 let Clogs = message.guild.channels.find(x => x.name == "logs");
 
+
+if(command == "register") {
+message.delete();
+
+if (message.channel.name !== 'register') return message.reply('**You must Register your social club name in the register chat**').then(message => message.delete(6000));
+let socialName = args.join(" ")
+if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
+
+message.member.removeRole("594185021389144066")
+message.member.addRole("594185059968221188")
+
+let cnl = client.channels.get('594187400339783721');
+let embed = new Discord.RichEmbed()
+.setAuthor(`${message.author.tag}`)
+.setColor("#42f45c")
+.addField('Social Club:', ` ${args}`)
+.setThumbnail(message.author.displayAvatarURL)
+cnl.send({embed})
+
+.catch(e => logger.error(e))
+
+let verifyEmbed = new Discord.RichEmbed()
+.setAuthor(message.member.displayName, message.author.displayAvatarURL)
+.setDescription('Your account has been successfully Registered.')
+.setColor('#36393f')
+message.channel.send(verifyEmbed);
+
+let embed77 = new Discord.RichEmbed()
+.setColor('#36393f')
+.setDescription(`The Social Club Name You Registered With is **${args}** If it is not Right just do **>unregister** in the unregister chat and register with the right social club name\n\nNow that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have\n\nThe money Dropper Sc name is **Batman_456** he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n`);
+message.author.send(embed77);
+
+}
 
 if(command == "unregister") {
 message.delete();
@@ -494,13 +424,123 @@ let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
 
-  setTimeout(() => {
+  //setTimeout(() => {
     
-  if(member.roles.get('594185021389144066')) member.kick('')  
-  member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
-  member.sendMessage(`**You Have Been Kicked In **Gta Money Drop**\n\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
+ // if(member.roles.get('594185021389144066')) member.kick('')  
+ // member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
+  //member.sendMessage(`**You Have Been Kicked In **Gta Money Drop**\n\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
 
-  }, 60555000);
+  //}, 60555000);
+
+
+  // Get all moderation commands
+fs.readdir('./Commands/Mod', (err, files) => {
+    files.forEach(f => {
+        let func = require('./Commands/Mod/' + f)
+        Commands.push({name : f.slice(0, -3), run : func})
+    })
+})
+
+// Get all general commands
+fs.readdir('./Commands/General', (err, files) => {
+    files.forEach(f => {
+        let func = require('./Commands/General/' + f)
+        Commands.push({name : f.slice(0, -3), run : func})
+    })
+})
+
+
+// Command Handler
+Client.on('message', message => {
+    
+    if(message.author.bot) return;
+    if(message.content.indexOf("!") !== 0) return;
+    if(message.channel.type == 'dm') return;
+    
+    const args = message.content.slice(1).trim().split(" ")
+    const command = args.shift()
+
+    if(Commands.find(c => c.name == command)) Commands.find(c => c.name == command).run(Client, message, args)
+})
+
+Client.on('guildMemberAdd', member => {
+    member.addRole(config.unregistered)
+    member.user.send(config.newmember)
+    .catch(() => {})
+    let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
+    data.push({time : +new Date() , id: member.id})
+    fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
+})
+
+
+// Timed muted handler 
+
+setInterval( async () => {
+    let data = JSON.parse(fs.readFileSync('./Data/mutes.json'))
+    if(data.length > 0){
+        data.forEach((m,i) => {
+            let hoy = new Date()
+            let warn = new Date(m.time)
+            if(hoy > warn) {
+                let guild = Client.guilds.get('664135583462981642')
+                let member = guild.member(m.id)
+                if(member) member.removeRole(config.muterole)
+                data.splice(i,1)
+                fs.writeFileSync('./Data/mutes.json', JSON.stringify(data),null,2)
+            }
+        })
+    }
+}, 60000)
+
+
+// Kick handler 
+setInterval( async () => {
+    let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
+    if(data.length > 0){
+        data.forEach(async (m,i) => {
+            let hoy = +new Date()
+            if((hoy - m.time) > 1.8e+6) {
+                let guild = Client.guilds.get('664135583462981642')
+                let member = guild.member(m.id)
+                if(member.roles.get(config.unregistered)) {
+                    await member.user.send(config.unregister_kick)
+                    .catch(() => {})
+                    member.kick()
+                }
+                data.splice(i,1)
+                fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
+            }
+        })
+    }
+}, 60000)
+
+
+// Livestream Notification
+
+var request = require("node-superfetch");
+
+setInterval(() => {
+  request.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCuYQmyVoKwqEnoM1gaDD9Kg&type=video&eventType=live&key=${config.youtubeapi}`)
+  .then(data => {
+    let search = data.body.items
+    if(search.length > 0) {
+        let temps = JSON.parse(fs.readFileSync('./Data/tempLive.json'))
+        if(temps.includes(search[0].id.videoId)) return;
+        else {
+            Client.channels.get(config.livechannel).send(`${config.livemessage} https://www.youtube.com/watch?v=${search[0].id.videoId}`)
+            temps.push(search[0].id.videoId)
+            fs.writeFileSync('./Data/tempLive.json', JSON.stringify(temps))
+        }
+
+    }
+})
+  
+}, 15000)
+
+setTimeout(() => {
+  fs.writeFileSync('./Data/tempLive.json', JSON.stringify([]))
+}, 7.2e+7)
+
 
 });
 
