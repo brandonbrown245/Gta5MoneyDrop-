@@ -11,18 +11,11 @@ Client.config = config
 
 const Commands = []
 
-// Get all moderation commands
-fs.readdir('./Commands/Mod', (err, files) => {
-    files.forEach(f => {
-        let func = require('./Commands/Mod/' + f)
-        Commands.push({name : f.slice(0, -3), run : func})
-    })
-})
 
 // Get all general commands
 fs.readdir('./Commands/General', (err, files) => {
     files.forEach(f => {
-        let func = require('./Commands/General/' + f)
+        let func = require('./Commands/' + f)
         Commands.push({name : f.slice(0, -3), run : func})
     })
 })
@@ -118,6 +111,110 @@ setInterval(() => {
 setTimeout(() => {
   fs.writeFileSync('./Data/tempLive.json', JSON.stringify([]))
 }, 7.2e+7)
+
+client.on("guildMemberRemove", async member => {
+    let Clogs = member.guild.channels.find(x => x.name == "mod-logs");
+     let data = JSON.parse(fs.readFileSync("./userdata.json"), "utf8");
+    if(!data[member.user.id]) return;
+    delete data[member.user.id]
+    fs.writeFileSync("./userdata.json", JSON.stringify(data, null, 2))
+    
+    let embed2 = new Discord.RichEmbed()
+    .setTitle("MEMBER LEFT")
+    .setColor("RANDOM")
+    .setDescription(`${member.user.tag} has left the server!`)
+    Clogs.send(embed2)
+    
+    })
+    
+    client.on("guildMemberAdd", async (member , message , ) => {
+    
+    let Clogs = member.guild.channels.find(x => x.name == "mod-log")
+    let embed2 = new Discord.RichEmbed()
+    .setTitle("MEMBER JOINED")
+    .setColor("RANDOM")
+    .setDescription(`${member.user.tag} has joined the server!`)
+    Clogs.send(embed2)
+        
+    const data = await request.get("https://i.imgur.com/LxRGbpx.png")
+    let base = data.body
+    let base1 = await loadImage(base)
+    const canvas = createCanvas(base1.width, base1.height);
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(base1, 0, 0);
+        
+    const background = await Canvas.loadImage(`./images.jpg`);
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    
+    let color = '#FFFFFF'
+    ctx.font = "20px arial"
+    ctx.fillStyle = color;
+    ctx.textAlign = "left"; 
+    ctx.fillText(`Welcome `, 185,70);
+    ctx.fillText(`${member.user.tag}`, 185,110);
+    ctx.fillText(`You are the ${nums(member.guild.memberCount)} user`, 185,150);
+    
+    ctx.strokeStyle = '#74037b';
+    ctx.beginPath();
+    ctx.arc(109,99,51.5, 0, 2 * Math.PI);
+    ctx.clip()
+    member.sendMessage(`Welcome to **Gta Money Drop**, ${member}! This is a free money drop discord server where you can get free money drops on GTA V Online PC \n\nTo get in the free money drop lobby's you have to register your Social Club name on this server by doing **>register Then your social club name** in the #register chat\nafter that you will get the Registered role and info on how to join the money drop lobby's`)
+    
+    member.guild.channels.get("594183892651737108").send(`Welcome to **Gta Money Drop**, ${member}! You are the ${nums(member.guild.memberCount)} user`)
+    let avatar1 = await request.get(member.user.displayAvatarURL)
+    let avatar = await loadImage(avatar1.body);
+    await ctx.drawImage(avatar, 52,46,114,104)
+    member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
+
+    client.on("guildMemberUpdate", async (oldMember, newMember) => {
+
+        Array.prototype.diff = function(a) {
+        return this.filter(function(i) {
+        return a.indexOf(i) < 0;
+        });
+        
+        };
+         
+        let Clogs = newMember.guild.channels.find(x => x.name == "mod-log")
+        const log = await newMember.guild.fetchAuditLogs({type:'MEMBER_ROLE_UPDATE'}).then(audit => audit.entries.first())
+        
+        if (oldMember._roles.diff(newMember._roles).length == 0) {
+        
+        
+        var roldado = newMember._roles.diff(oldMember._roles)
+        var rol = newMember.guild.roles.get(roldado.toString())
+        
+        let embed2 = new Discord.RichEmbed()
+        .setAuthor("ROLE UPDATED")
+        .setColor("RANDOM")
+        .setDescription(`${log.executor.username}#${log.executor.discriminator} gave the role **${rol.name}** to ${newMember.user.tag}`)
+        Clogs.send(embed2)
+        
+        }
+            
+        else if (oldMember._roles.diff(newMember._roles).length == 1) {
+        
+        var rolsacado = oldMember._roles.diff(newMember._roles)
+        var rol = newMember.guild.roles.get(rolsacado.toString())
+        let embed2 = new Discord.RichEmbed()
+        .setAuthor("ROLE UPDATED")
+        .setColor("RANDOM")
+        .setDescription(`${log.executor.username}#${log.executor.discriminator} removed the role **${rol.name}** from ${newMember.user.tag}`)
+        Clogs.send(embed2)
+            
+        }
+        
+        if(oldMember.nickname !== newMember.nickname){
+        let embed2 = new Discord.RichEmbed()
+        .setAuthor("NAME UPDATED")
+        .setColor("RANDOM")
+        .setDescription(`${oldMember.nickname} is now ${newMember.nickname}`)
+        Clogs.send(embed2)
+            
+        }
+        })
+
+    });
 
 
 Client.login(config.token)
