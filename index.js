@@ -1,5 +1,6 @@
 // Deps
 const Discord = require('discord.js')
+const Client = new Discord.Client()
 const fs = require('fs')
 var config = require("./config.json");
 var request = require("node-superfetch");
@@ -26,9 +27,6 @@ var ytdl = require('ytdl-core');
 var { createCanvas, loadImage } = require('canvas');
 var path = require("path")
 var user = user
-const Client = new Discord.Client()
-
-
 
 
 const Commands = []
@@ -299,111 +297,6 @@ let avatar1 = await request.get(member.user.displayAvatarURL)
 let avatar = await loadImage(avatar1.body);
 await ctx.drawImage(avatar, 52,46,114,104)
 member.guild.channels.get("594183892651737108").send({files : [await canvas.toBuffer()]}) 
-
-  //setTimeout(() => {
-    
- // if(member.roles.get('594185021389144066')) member.kick('')  
- // member.guild.channels.get("594192598613360671").send(`**${member.user.tag}** Has Been Kicked From The Server Because He Didnt Register His Social Club Name`);
-  //member.sendMessage(`**You Have Been Kicked In **Gta Money Drop**\n\n**Reason**: Didnt Register Social Club Name On The Server\n**`)
-
-  //}, 60555000);
-
-
-// Get all moderation commands
-fs.readdir('./Commands/Mod', (err, files) => {
-files.forEach(f => {
-let func = require('./Commands/Mod/' + f)
-Commands.push({name : f.slice(0, -3), run : func})
-})
-})
-
-// Get all general commands
-fs.readdir('./Commands/General', (err, files) => {
-files.forEach(f => {
-let func = require('./Commands/General/' + f)
-Commands.push({name : f.slice(0, -3), run : func})
-})
-})
-
-Client.on('guildMemberAdd', member => {
-member.addRole(config.unregistered)
-member.user.send(config.newmember)
-.catch(() => {})
-let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
- data.push({time : +new Date() , id: member.id})
-fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
-})
-
-
-// Timed muted handler 
-
-setInterval( async () => {
-let data = JSON.parse(fs.readFileSync('./Data/mutes.json'))
-if(data.length > 0){
-data.forEach((m,i) => {
-let hoy = new Date()
-let warn = new Date(m.time)
-if(hoy > warn) {
-let guild = Client.guilds.get('664135583462981642')
-let member = guild.member(m.id)
-if(member) member.removeRole(config.muterole)
-data.splice(i,1)
-fs.writeFileSync('./Data/mutes.json', JSON.stringify(data),null,2)
-}
-})
-
-}
-}, 60000)
-
-
-// Kick handler 
-setInterval( async () => {
-let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
-if(data.length > 0){
-data.forEach(async (m,i) => {
-let hoy = +new Date()
-if((hoy - m.time) > 1.8e+6) {
-let guild = Client.guilds.get('664135583462981642')
-let member = guild.member(m.id)
-if(member.roles.get(config.unregistered)) {
-await member.user.send(config.unregister_kick)
-.catch(() => {})
-member.kick()
-}
-data.splice(i,1)
-fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
-}
-})
-}
-}, 60000)
-
-
-// Livestream Notification
-
-var request = require("node-superfetch");
-
-setInterval(() => {
-request.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCuYQmyVoKwqEnoM1gaDD9Kg&type=video&eventType=live&key=${config.youtubeapi}`)
-.then(data => {
-let search = data.body.items
-if(search.length > 0) {
-let temps = JSON.parse(fs.readFileSync('./Data/tempLive.json'))
-if(temps.includes(search[0].id.videoId)) return;
-else {
-Client.channels.get(config.livechannel).send(`${config.livemessage} https://www.youtube.com/watch?v=${search[0].id.videoId}`)
-temps.push(search[0].id.videoId)
-fs.writeFileSync('./Data/tempLive.json', JSON.stringify(temps))
-}
-
-    
-}
-})
-  
-}, 15000)
-
-setTimeout(() => {
-  fs.writeFileSync('./Data/tempLive.json', JSON.stringify([]))
-}, 7.2e+7)
 
 
 });
