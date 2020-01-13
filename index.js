@@ -32,6 +32,10 @@ const Client = new Discord.Client()
 Client.on('ready', () => console.log('Bot Online!'))
 Client.config = config
 
+const Commands = []
+
+
+// Command Handler
 Client.on('message', message => {
     
     if(message.author.bot) return;
