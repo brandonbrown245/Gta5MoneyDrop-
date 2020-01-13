@@ -48,52 +48,7 @@ Client.on('message', message => {
 
     if(Commands.find(c => c.name == command)) Commands.find(c => c.name == command).run(Client, message, args)
 
-    if(command == "unregister")
 
-SQLite.open('./userData.sqlite')
-.then(async sql => {
-    let user = await sql.get(`SELECT * FROM users WHERE id = ${message.author.id}`)
-    if(!user) return message.reply("You are not registered!")
-    sql.run(`DELETE FROM users WHERE id = ${message.author.id}`)
-    .then(() => {
-        message.member.addRole("594185021389144066")
-        message.member.removeRole("594185059968221188")
-        let logsChannel = client.channels.get(client.config.logschannel)
-        message.channel.send(`Successfully unregistered!`)
-        .then(msg => msg.delete(5000))
-        logsChannel.send(`**[!]** ${message.author} was unregistered!`)
-
-        let data = JSON.parse(fs.readFileSync('./tempRegs.json'))
-        data.push({time : +new Date() , id: message.member.id})
-        fs.writeFileSync('./tempRegs.json', JSON.stringify(data,null,2))
-    })
-    .catch((e) => {
-        console.log(e)
-        message.reply('Oops, there was an error trying to delete your info!')
-    })
-})
-
-if (command == "userinfo")
-
-if(message.mentions.members.first()) var member = message.mentions.members.first()
-else var member = message.member
-
-let sql = SQLite.open('./userData.sqlite')
-let user = sql.get(`SELECT social FROM users WHERE id = ${member.id}`)
-
-if(!user) var nick = '**NOT REGISTERED**'
-else var nick = user.social
-
-let embed = new Discord.RichEmbed()
-.setThumbnail(member.user.displayAvatarURL)
-.setAuthor(member.user.tag)
-.addField('Account Creation', member.user.createdAt.toDateString(), true)
-.addField('Joined Server', member.joinedAt.toDateString())
-.addField('Social Club Name', nick)
-.setFooter(`Member ID : ${member.id}`)
-.setColor(0x66b3ff)
-
-message.channel.send(embed)
 
     if(command == "register") {
 
@@ -148,8 +103,54 @@ message.channel.send(embed)
                 message.reply('Oops, there was an error trying to save your info!')
             })
         })
-    
     }
+    if(command == "unregister")
+
+    SQLite.open('./userData.sqlite')
+    .then(async sql => {
+        let user = await sql.get(`SELECT * FROM users WHERE id = ${message.author.id}`)
+        if(!user) return message.reply("You are not registered!")
+        sql.run(`DELETE FROM users WHERE id = ${message.author.id}`)
+        .then(() => {
+            message.member.addRole("594185021389144066")
+            message.member.removeRole("594185059968221188")
+            let logsChannel = client.channels.get(client.config.logschannel)
+            message.channel.send(`Successfully unregistered!`)
+            .then(msg => msg.delete(5000))
+            logsChannel.send(`**[!]** ${message.author} was unregistered!`)
+    
+            let data = JSON.parse(fs.readFileSync('./tempRegs.json'))
+            data.push({time : +new Date() , id: message.member.id})
+            fs.writeFileSync('./tempRegs.json', JSON.stringify(data,null,2))
+        })
+        .catch((e) => {
+            console.log(e)
+            message.reply('Oops, there was an error trying to delete your info!')
+        })
+    })
+    
+    if (command == "userinfo")
+    
+    if(message.mentions.members.first()) var member = message.mentions.members.first()
+    else var member = message.member
+    
+    let sql = await SQLite.open('./userData.sqlite')
+    let user = await sql.get(`SELECT social FROM users WHERE id = ${member.id}`)
+    
+    if(!user) var nick = '**NOT REGISTERED**'
+    else var nick = user.social
+    
+    let embed = new Discord.RichEmbed()
+    .setThumbnail(member.user.displayAvatarURL)
+    .setAuthor(member.user.tag)
+    .addField('Account Creation', member.user.createdAt.toDateString(), true)
+    .addField('Joined Server', member.joinedAt.toDateString())
+    .addField('Social Club Name', nick)
+    .setFooter(`Member ID : ${member.id}`)
+    .setColor(0x66b3ff)
+    
+    message.channel.send(embed)
+
 })
 
 
