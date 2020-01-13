@@ -28,8 +28,6 @@ var ytdl = require('ytdl-core');
 var { createCanvas, loadImage } = require('canvas');
 var path = require("path")
 var user = user
-const config = require('./config.json')
-
 const Client = new Discord.Client()
 
 Client.on('ready', () => console.log('Bot Online!'))
