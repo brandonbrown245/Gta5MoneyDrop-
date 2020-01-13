@@ -217,4 +217,4 @@ client.on("guildMemberRemove", async member => {
     });
 
 
-Client.login(config.token)
+Client.login(token)
