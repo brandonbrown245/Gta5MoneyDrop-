@@ -24,6 +24,7 @@ var Canvas = require(`canvas`);
 var db = require("quick.db");
 var ytdl = require('ytdl-core');
 const SQLite = require('sqlite')
+
 var { createCanvas, loadImage } = require('canvas');
 const token = process.env.token
 
@@ -34,6 +35,22 @@ Client.config = config
 
 const Commands = []
 
+
+// Get all general commands
+fs.readdir('./Commands/', (err, files) => {
+    files.forEach(f => {
+        let func = require('./Commands/' + f)
+        Commands.push({name : f.slice(0, -3), run : func})
+    })
+})
+
+// Get all general commands
+fs.readdir('./Data/', (err, files) => {
+    files.forEach(f => {
+        let func = require('./Data/' + f)
+        Commands.push({name : f.slice(0, -3), run : func})
+    })
+})
 
 // Command Handler
 Client.on('message', message => {
