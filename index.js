@@ -30,8 +30,8 @@ var user = user
 
 
 
-Client.on('ready', () => console.log('Bot Online!'))
-Client.config = config
+//Client.on('ready', () => console.log('Bot Online!'))
+//Client.config = config
 
 const Commands = []
 
