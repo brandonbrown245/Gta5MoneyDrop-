@@ -50,7 +50,7 @@ Client.on('message', message => {
 
     if(command == "unregister")
 
-SQLite.open('./Data/userData.sqlite')
+SQLite.open('./userData.sqlite')
 .then(async sql => {
     let user = await sql.get(`SELECT * FROM users WHERE id = ${message.author.id}`)
     if(!user) return message.reply("You are not registered!")
@@ -78,7 +78,7 @@ if (command == "userinfo")
 if(message.mentions.members.first()) var member = message.mentions.members.first()
 else var member = message.member
 
-let sql = await SQLite.open('./Data/userData.sqlite')
+let sql = await SQLite.open('./userData.sqlite')
 let user = await sql.get(`SELECT social FROM users WHERE id = ${member.id}`)
 
 if(!user) var nick = '**NOT REGISTERED**'
