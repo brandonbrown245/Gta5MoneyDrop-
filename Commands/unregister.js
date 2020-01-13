@@ -2,7 +2,7 @@ const SQLite = require('sqlite')
 const fs = require('fs')
 module.exports = (client, message, args) => {
 
-    SQLite.open('./Data/userData.sqlite')
+    SQLite.open('./userData.sqlite')
     .then(async sql => {
         let user = await sql.get(`SELECT * FROM users WHERE id = ${message.author.id}`)
         if(!user) return message.reply("You are not registered!")
@@ -15,9 +15,9 @@ module.exports = (client, message, args) => {
             .then(msg => msg.delete(5000))
             logsChannel.send(`**[!]** ${message.author} was unregistered!`)
 
-            let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
+            let data = JSON.parse(fs.readFileSync('./tempRegs.json'))
             data.push({time : +new Date() , id: message.member.id})
-            fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data,null,2))
+            fs.writeFileSync('./tempRegs.json', JSON.stringify(data,null,2))
         })
         .catch((e) => {
             console.log(e)
