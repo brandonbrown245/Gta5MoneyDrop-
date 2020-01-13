@@ -55,7 +55,7 @@ Client.on('message', message => {
     
         if(!name) return message.reply("You need to provide your Social Club nickname")
     
-        SQLite.open('./userData.sqlite/')
+        SQLite.open('./userData.sqlite')
         .then(async sql => {
             let user = await sql.get(`SELECT * FROM users WHERE id = ${message.author.id}`)
             if(user) return message.reply("You are already registered!")
