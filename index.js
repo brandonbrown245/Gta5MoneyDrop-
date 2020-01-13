@@ -37,10 +37,6 @@ Client.config = config
 
 const Commands = []
 
-
-
-
-
 function nums(i) {
 var j = i % 10,
 k = i % 100;
@@ -85,40 +81,6 @@ var args = message.content.slice(prefix.length).trim().split(/ +/g);
 var command = args.shift().toLowerCase()
 
 let Clogs = message.guild.channels.find(x => x.name == "logs");
-
-
-if(command == "register") {
-message.delete();
-
-if (message.channel.name !== 'register') return message.reply('**You must Register your social club name in the register chat**').then(message => message.delete(6000));
-let socialName = args.join(" ")
-if(!socialName) return message.reply("Please specify your Social Club username after the command").then(message => message.delete(6000));
-
-message.member.removeRole("594185021389144066")
-message.member.addRole("594185059968221188")
-
-let cnl = client.channels.get('594187400339783721');
-let embed = new Discord.RichEmbed()
-.setAuthor(`${message.author.tag}`)
-.setColor("#42f45c")
-.addField('Social Club:', ` ${args}`)
-.setThumbnail(message.author.displayAvatarURL)
-cnl.send({embed})
-
-.catch(e => logger.error(e))
-
-let verifyEmbed = new Discord.RichEmbed()
-.setAuthor(message.member.displayName, message.author.displayAvatarURL)
-.setDescription('Your account has been successfully Registered.')
-.setColor('#36393f')
-message.channel.send(verifyEmbed);
-
-let embed77 = new Discord.RichEmbed()
-.setColor('#36393f')
-.setDescription(`The Social Club Name You Registered With is **${args}** If it is not Right just do **>unregister** in the unregister chat and register with the right social club name\n\nNow that you are registered, please be sure to read the rules and how to join. Other than that, enjoy your time in the server and do not be afraid to ask any questions you may have\n\nThe money Dropper Sc name is **Batman_456** he will not add you it is up to you to add the money Dropper\n\nHow to join the money drop lobby\n\nWhen you register you will get the sc of the money dropper you have to add him when you did add him. he will add you when he starts a money drop then you just join his lobby just if he says he is doing a money drop\n`);
-message.author.send(embed77);
-
-}
 
 if(command == "unregister") {
 message.delete();
