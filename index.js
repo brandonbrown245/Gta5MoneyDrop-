@@ -32,19 +32,6 @@ const Client = new Discord.Client()
 Client.on('ready', () => console.log('Bot Online!'))
 Client.config = config
 
-const Commands = []
-
-
-// Get all general commands
-fs.readdir('./Commands/', (err, files) => {
-    files.forEach(f => {
-        let func = require('./Commands/' + f)
-        Commands.push({name : f.slice(0, -3), run : func})
-    })
-})
-
-
-// Command Handler
 Client.on('message', message => {
     
     if(message.author.bot) return;
