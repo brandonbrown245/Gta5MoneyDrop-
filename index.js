@@ -19,16 +19,15 @@ var rn = require('random-number');
 var { RichEmbed } = require('discord.js');
 var ms = require("ms")
 const { Client } = require('discord.js');
+const Client = new Discord.Client()
 const Enmap = require('enmap');
 var util = require("./handlers")
 var Canvas = require(`canvas`);
-var client = new Discord.Client();
 var db = require("quick.db");
 var ytdl = require('ytdl-core');
 var { createCanvas, loadImage } = require('canvas');
 var path = require("path")
 var user = user
-const Client = new Discord.Client()
 
 
 
