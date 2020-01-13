@@ -13,7 +13,7 @@ const Commands = []
 
 
 // Get all general commands
-fs.readdir('./Commands/General', (err, files) => {
+fs.readdir('./Commands/', (err, files) => {
     files.forEach(f => {
         let func = require('./Commands/' + f)
         Commands.push({name : f.slice(0, -3), run : func})
