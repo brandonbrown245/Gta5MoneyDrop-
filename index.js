@@ -28,9 +28,9 @@ var ytdl = require('ytdl-core');
 var { createCanvas, loadImage } = require('canvas');
 var path = require("path")
 var user = user
-const config = require('./config.json')
-
 const Client = new Discord.Client()
+
+
 
 Client.on('ready', () => console.log('Bot Online!'))
 Client.config = config
@@ -79,6 +79,8 @@ if(message.channel.type == "dm") return;
 var prefix = config.PREFIX;
 var args = message.content.slice(prefix.length).trim().split(/ +/g);
 var command = args.shift().toLowerCase()
+
+if(Commands.find(c => c.name == command)) Commands.find(c => c.name == command).run(Client, message, args)
 
 let Clogs = message.guild.channels.find(x => x.name == "logs");
 
@@ -144,27 +146,6 @@ Queue = new Array();
 message.channel.send(`**<@&594185059968221188> Money Drop Has Stopped**`)
 message.guild.channels.get(config.QLOGS).send(util.sendEmbed(message, `The current Drop by ${message.author} has been stopped`));
 
-}
-
-if(command == "nsfw"){
-message.delete();
-if (!message.channel.nsfw) return message.reply("You can only use this command on nsfw channels!").then(message => message.delete(6000));
-var subreddits = [
-'NSFW_Wallpapers',
-'HighResNSFW',
-'nsfw_hd',]
-
-var sub = subreddits[Math.round(Math.random() * (subreddits.length - 1))];
-
-randomPuppy(sub)
-.then(url => {
-const embed = new Discord.RichEmbed()
-.setColor("RANDOM")
-.setImage(url);
-message.channel.send({
-embed
-});
-})
 
 }
 
@@ -200,70 +181,7 @@ message.channel.send(`RIP, ${rMember} you have lost the ${gRole.name} role!`)
   
 }
 
-if(command == "warn") {
-message.delete();
-if(!message.member.hasPermission("BAN_MEMBERS")) return message.reply("Sorry sir you are not an Administrator so you can't use this command.").then(message => message.delete(6000));
-let wUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0])
-if(!wUser) return message.reply("Sorry sir i can't find the person you are looking for.").then(message => message.delete(6000));
-if(wUser.hasPermission("BAN_MEMBERS")) return message.reply("sorry sir you can't do that.").then(message => message.delete(6000));
-let reason = args.join(" ").slice(22);
 
-if(!warns[wUser.id]) warns[wUser.id] = {
-warns: 0
-    
-};
-  
-warns[wUser.id].warns++;
-fs.writeFile("./warns.json", JSON.stringify(warns), (err) => {
-if (err) console.log(err)
-
-});
-  
-let warnEmbed = new Discord.RichEmbed()
-.setDescription("Warns")
-.setAuthor(message.author.username)
-.setColor("#fc6400")
-.addField("Warned User", `<@${wUser.id}>`)
-.addField("Warned In", message.channel)
-.addField("Number of Warnings", warns[wUser.id].warns)
-.addField("Reason", reason);
-  
-let warnchannel = message.guild.channels.find(`name`, "mod-log");
-if(!warnchannel) return message.reply("Cant't find channel mod-log ");
-  
-warnchannel.send(warnEmbed);
-  
-
-if(warns[wUser.id].warns == 1){
-message.channel.send(`<@${wUser.id}> has been warned`);
-
-}
-
-if(warns[wUser.id].warns == 2){
-message.channel.send(`<@${wUser.id}> has been warned`);
-let muterole = message.guild.roles.find(`name`, "Muted");
-if(!muterole) return message.reply("You should create a role called Muted.").then(message => message.delete(6000));
- 
-let mutetime = "2h";
-await(wUser.addRole(muterole.id));
-message.channel.send(`<@${wUser.id}> has been temporarily muted for 2 hours`);
-  
-setTimeout(function(){
-wUser.removeRole(muterole.id)
-message.reply(`<@${wUser.id}> has been unmuted.`);
-}, ms(mutetime))
-    
-}
-    
-if(warns[wUser.id].warns == 3){
-message.guild.member(wUser).ban(reason);
-message.channel.send(`<@${wUser.id}> has been banned from the server.`);
-wUser.send(`**You have been banned in ${message.guild.name}\n**Reason**: ${reason}\n**`)
-    
-}
-      
-}
-  
 if(command == "stats") {
 message.delete();
 let cpuLol;
@@ -395,85 +313,72 @@ member.guild.channels.get("594183892651737108").send({files : [await canvas.toBu
   //}, 60555000);
 
 
-  // Get all moderation commands
+// Get all moderation commands
 fs.readdir('./Commands/Mod', (err, files) => {
-    files.forEach(f => {
-        let func = require('./Commands/Mod/' + f)
-        Commands.push({name : f.slice(0, -3), run : func})
-    })
+files.forEach(f => {
+let func = require('./Commands/Mod/' + f)
+Commands.push({name : f.slice(0, -3), run : func})
+})
 })
 
 // Get all general commands
 fs.readdir('./Commands/General', (err, files) => {
-    files.forEach(f => {
-        let func = require('./Commands/General/' + f)
-        Commands.push({name : f.slice(0, -3), run : func})
-    })
+files.forEach(f => {
+let func = require('./Commands/General/' + f)
+Commands.push({name : f.slice(0, -3), run : func})
 })
-
-
-// Command Handler
-Client.on('message', message => {
-    
-    if(message.author.bot) return;
-    if(message.content.indexOf("!") !== 0) return;
-    if(message.channel.type == 'dm') return;
-    
-    const args = message.content.slice(1).trim().split(" ")
-    const command = args.shift()
-
-    if(Commands.find(c => c.name == command)) Commands.find(c => c.name == command).run(Client, message, args)
 })
 
 Client.on('guildMemberAdd', member => {
-    member.addRole(config.unregistered)
-    member.user.send(config.newmember)
-    .catch(() => {})
-    let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
-    data.push({time : +new Date() , id: member.id})
-    fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
+member.addRole(config.unregistered)
+member.user.send(config.newmember)
+.catch(() => {})
+let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
+ data.push({time : +new Date() , id: member.id})
+fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
 })
 
 
 // Timed muted handler 
 
 setInterval( async () => {
-    let data = JSON.parse(fs.readFileSync('./Data/mutes.json'))
-    if(data.length > 0){
-        data.forEach((m,i) => {
-            let hoy = new Date()
-            let warn = new Date(m.time)
-            if(hoy > warn) {
-                let guild = Client.guilds.get('664135583462981642')
-                let member = guild.member(m.id)
-                if(member) member.removeRole(config.muterole)
-                data.splice(i,1)
-                fs.writeFileSync('./Data/mutes.json', JSON.stringify(data),null,2)
-            }
-        })
-    }
+let data = JSON.parse(fs.readFileSync('./Data/mutes.json'))
+if(data.length > 0){
+data.forEach((m,i) => {
+let hoy = new Date()
+let warn = new Date(m.time)
+if(hoy > warn) {
+let guild = Client.guilds.get('664135583462981642')
+let member = guild.member(m.id)
+if(member) member.removeRole(config.muterole)
+data.splice(i,1)
+fs.writeFileSync('./Data/mutes.json', JSON.stringify(data),null,2)
+}
+})
+
+}
 }, 60000)
 
 
 // Kick handler 
 setInterval( async () => {
-    let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
-    if(data.length > 0){
-        data.forEach(async (m,i) => {
-            let hoy = +new Date()
-            if((hoy - m.time) > 1.8e+6) {
-                let guild = Client.guilds.get('664135583462981642')
-                let member = guild.member(m.id)
-                if(member.roles.get(config.unregistered)) {
-                    await member.user.send(config.unregister_kick)
-                    .catch(() => {})
-                    member.kick()
-                }
-                data.splice(i,1)
-                fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
-            }
-        })
-    }
+let data = JSON.parse(fs.readFileSync('./Data/tempRegs.json'))
+if(data.length > 0){
+data.forEach(async (m,i) => {
+let hoy = +new Date()
+if((hoy - m.time) > 1.8e+6) {
+let guild = Client.guilds.get('664135583462981642')
+let member = guild.member(m.id)
+if(member.roles.get(config.unregistered)) {
+await member.user.send(config.unregister_kick)
+.catch(() => {})
+member.kick()
+}
+data.splice(i,1)
+fs.writeFileSync('./Data/tempRegs.json', JSON.stringify(data),null,2)
+}
+})
+}
 }, 60000)
 
 
@@ -482,19 +387,20 @@ setInterval( async () => {
 var request = require("node-superfetch");
 
 setInterval(() => {
-  request.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCuYQmyVoKwqEnoM1gaDD9Kg&type=video&eventType=live&key=${config.youtubeapi}`)
-  .then(data => {
-    let search = data.body.items
-    if(search.length > 0) {
-        let temps = JSON.parse(fs.readFileSync('./Data/tempLive.json'))
-        if(temps.includes(search[0].id.videoId)) return;
-        else {
-            Client.channels.get(config.livechannel).send(`${config.livemessage} https://www.youtube.com/watch?v=${search[0].id.videoId}`)
-            temps.push(search[0].id.videoId)
-            fs.writeFileSync('./Data/tempLive.json', JSON.stringify(temps))
-        }
+request.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCuYQmyVoKwqEnoM1gaDD9Kg&type=video&eventType=live&key=${config.youtubeapi}`)
+.then(data => {
+let search = data.body.items
+if(search.length > 0) {
+let temps = JSON.parse(fs.readFileSync('./Data/tempLive.json'))
+if(temps.includes(search[0].id.videoId)) return;
+else {
+Client.channels.get(config.livechannel).send(`${config.livemessage} https://www.youtube.com/watch?v=${search[0].id.videoId}`)
+temps.push(search[0].id.videoId)
+fs.writeFileSync('./Data/tempLive.json', JSON.stringify(temps))
+}
 
-    }
+    
+}
 })
   
 }, 15000)
