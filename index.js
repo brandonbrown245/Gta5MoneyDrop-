@@ -105,6 +105,31 @@ Client.on('message', message => {
     }
 })
 
+if(command == "unregister")
+
+SQLite.open('./Data/userData.sqlite')
+.then(async sql => {
+    let user = await sql.get(`SELECT * FROM users WHERE id = ${message.author.id}`)
+    if(!user) return message.reply("You are not registered!")
+    sql.run(`DELETE FROM users WHERE id = ${message.author.id}`)
+    .then(() => {
+        message.member.addRole("594185021389144066")
+        message.member.removeRole("594185059968221188")
+        let logsChannel = client.channels.get(client.config.logschannel)
+        message.channel.send(`Successfully unregistered!`)
+        .then(msg => msg.delete(5000))
+        logsChannel.send(`**[!]** ${message.author} was unregistered!`)
+
+        let data = JSON.parse(fs.readFileSync('./tempRegs.json'))
+        data.push({time : +new Date() , id: message.member.id})
+        fs.writeFileSync('./tempRegs.json', JSON.stringify(data,null,2))
+    })
+    .catch((e) => {
+        console.log(e)
+        message.reply('Oops, there was an error trying to delete your info!')
+    })
+})
+
 
 Client.on('guildMemberAdd', member => {
     member.addRole(config.unregistered)
