@@ -78,8 +78,8 @@ if (command == "userinfo")
 if(message.mentions.members.first()) var member = message.mentions.members.first()
 else var member = message.member
 
-let sql = await SQLite.open('./userData.sqlite')
-let user = await sql.get(`SELECT social FROM users WHERE id = ${member.id}`)
+let sql = SQLite.open('./userData.sqlite')
+let user = sql.get(`SELECT social FROM users WHERE id = ${member.id}`)
 
 if(!user) var nick = '**NOT REGISTERED**'
 else var nick = user.social
