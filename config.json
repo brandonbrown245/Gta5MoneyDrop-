@@ -1,4 +1,15 @@
 {
     "PREFIX" : ">",
-    "QLOGS" : "595734427989180429"
+    "QLOGS" : "595734427989180429",
+    "youtubeapi" : "",
+    "modRole" : "594184032905068552",
+    "registered" : "594185059968221188",
+    "unregistered" : "594185021389144066",
+    "muterole" : "664137229685227573",
+    "logschannel" : "595734427989180429",
+    "newmember" : "Welcome to the server! Please register yourself to get full access!",
+    "unregister_kick" : "You were kicked",
+    "livechannel" : "594183922049482778",
+    "livemessage" : "Hello, I'm live!"
+        
 }
