@@ -1,12 +1,12 @@
 {
-  "name": "tutorial-bot",
+  "name": "gta-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Zendovo",
+  "author": "ManU#0001",
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.5.0",
