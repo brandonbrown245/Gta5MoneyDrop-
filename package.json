@@ -9,10 +9,11 @@
   "author": "ManU#0001",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.5.1",
+    "discord.js": "^11.6.4",
     "moment": "^2.24.0",
     "ms": "^2.1.2",
     "node-superfetch": "^0.1.9",
+    "node.js": "0.0.1-security",
     "sqlite": "^3.0.3"
   }
 }
